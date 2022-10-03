@@ -9,3 +9,116 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+
+//Restaurantes
+
+enum categoriaProducto {
+platoPrincipal
+bebida
+entrada
+}
+
+model sede {
+id Int @id @default(autoincrement())
+nombre String
+productos sedeProducto[]
+mesas mesa[]
+usuarios usuario[]
+}
+
+model producto {
+id Int @id @default(autoincrement())
+descripcion String
+precio Decimal
+ingredientes String
+deleted Boolean @default(false)
+categoria categoriaProducto
+sedes sedeProducto[]
+estado Boolean
+comandas detalleComanda[]
+}
+
+model sedeProducto {
+idSede Int
+idProducto Int
+sede sede @relation(fields: [idSede],references: [id])
+producto producto @relation(fields: [idProducto],references: [id])
+@@id([idProducto, idSede])
+}
+
+
+model mesa {
+id Int @id @default(autoincrement())
+codigo String
+estado Boolean
+capacidad Int
+idSede Int
+comandas comanda[]
+sede sede @relation(fields: [idSede],references: [id])
+}
+
+enum estadoComanda {
+  registrado
+  enProceso
+  pendiente
+  entregada
+  porPagar
+}
+
+model comanda {
+id Int @id @default(autoincrement())
+idUsuario Int
+estado estadoComanda
+direccion String?
+nota String?
+subTotal Decimal
+impuesto Decimal
+total Decimal
+idMesa Int?
+mesa mesa? @relation(fields: [idMesa],references: [id])
+detallesComanda detalleComanda[]
+detallesPago detallePago[]
+}
+
+model detallePago {
+id Int @id @default(autoincrement())
+tipoPago metodoPago
+monto Decimal
+idComanda Int
+comanda comanda @relation(fields: [idComanda],references: [id])
+}
+
+enum metodoPago {
+  efectivo
+  tarjeta
+}
+
+model detalleComanda {
+  idComanda Int
+  idProducto Int
+  cantidad Int
+  comanda comanda @relation(fields: [idComanda], references: [id])
+  producto producto @relation(fields: [idProducto], references: [id])
+  @@id([idComanda,idProducto])
+}
+
+
+//Seguridad
+enum rol {
+cliente
+mesero
+administrador
+}
+
+model usuario {
+id String @id 
+nombre String
+apellido1 String
+apellido2 String
+telefono String
+deleted Boolean @default(false)
+rol rol @default(cliente)
+idSede Int?
+sede sede? @relation(fields: [idSede],references: [id])
+}
