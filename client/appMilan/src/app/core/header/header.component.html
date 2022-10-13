@@ -1,13 +1,75 @@
-    <mat-toolbar color="primary">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>home</mat-icon>
+      <span>Inicio</span>
+    </button>
+    <button mat-menu-item [matMenuTriggerFor]="ordenar">
+      <mat-icon>receipt_long</mat-icon>Ordenar
+    </button>
+    <mat-menu #ordenar="matMenu">
+      <button mat-menu-item>
+        <mat-icon>table_bar</mat-icon>
+        <span>Reserva</span>
       </button>
-      <span><img src="../../../assets/IMG/Logo.png" alt="Logo" title="Logo" id="logo"></span>
-      <span class="example-spacer"></span>
-      <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
+      <button mat-menu-item>
+        <mat-icon> sports_motorsports </mat-icon>
+        <span>Domicilio</span>
       </button>
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
+    </mat-menu>
+
+    <button mat-menu-item [matMenuTriggerFor]="mantenimientos">
+      <mat-icon>engineering</mat-icon>Mantenimientos
+    </button>
+    <mat-menu #mantenimientos="matMenu">
+      <button mat-menu-item>
+        <mat-icon>group</mat-icon>
+        <span>Usuarios</span>
       </button>
-    </mat-toolbar>
+      <button mat-menu-item>
+        <mat-icon> local_shipping </mat-icon>
+        <span>Productos</span>
+      </button>
+    </mat-menu>
+
+    <button mat-menu-item>
+      <mat-icon>trending_up</mat-icon>
+      <span>Reportes</span>
+    </button>
+
+    <button mat-menu-item>
+      <mat-icon>help</mat-icon>
+      <span>Acerca de</span>
+    </button>
+  </mat-menu>
+
+  <span
+    ><img src="../../../assets/IMG/Logo.png" alt="Logo" title="Logo" id="logo"
+  /></span>
+  <span class="spacer"></span>
+  <span>
+   garybarahona85@gmail.com
+</span>
+<span></span>
+<button mat-icon-button [matMenuTriggerFor]="usuario">
+  <mat-icon>person</mat-icon>
+</button>
+<mat-menu #usuario="matMenu">
+  <button mat-menu-item>
+    <mat-icon>
+      login
+      </mat-icon>
+    <span>Iniciar sesión</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>
+      logout
+      </mat-icon>
+    <span>Cerrar sesión</span>
+  </button>
+  
+  </mat-menu>
+</mat-toolbar>
