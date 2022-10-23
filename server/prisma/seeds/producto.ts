@@ -2,23 +2,20 @@ import {categoriaProducto} from "@prisma/client";
 export const productos=[
     //1
     {
-        id:1,
         descripcion:"Pizza Napolitana",
         precio:8000,
         ingredientes:"Salsa de tomate,jamon,queso",
         categoria:categoriaProducto.platoPrincipal,
-        estado:1,
+        estado: false,
     },
     {
-        id:2,
         descripcion:"Pizza Margherita",
         precio:6000,
         ingredientes:" Queso mozzarella,tomate, aceite y albahaca",
         categoria:categoriaProducto.platoPrincipal,
-        estado:1,
+        estado: true,
     },
-    {
-        id:3,
+  /*  {
         descripcion:"pizza Quattro Stagioni",
         precio:12000,
         ingredientes:"jamón cocido, setas, alcachofas y aceitunas negra",
@@ -26,7 +23,6 @@ export const productos=[
         estado:1,
     },
     {
-        id:4,
         descripcion:"pizza Prosciutto e funghi",
         precio:7000,
         ingredientes:"Salsa de tomate,jamon al horno",
@@ -34,7 +30,6 @@ export const productos=[
         estado:1,
     },
     {
-        id:5,
         descripcion:"Pizza Diavola",
         precio:9000,
         ingredientes:"Salsa de tomate,peperoni,salami picante,queso",
@@ -42,7 +37,6 @@ export const productos=[
         estado:1,
     }, 
     {
-        id:6,
         descripcion:"FETUCCINI ALLA PUTTANESCA",
         precio:4000,
         ingredientes:"ajo, tomate, guindillas secas, aceite de oliva virgen y anchoas en salmuera",
@@ -50,7 +44,6 @@ export const productos=[
         estado:1,
     },
     {
-        id:7,
         descripcion:"TRENETTE al PESTO",
         precio:4000,
         ingredientes:"albahaca, ajo,aceite de oliva,judías y papas cocidas  en trozos",
@@ -58,7 +51,6 @@ export const productos=[
         estado:1,
     },
     {
-        id:8,
         descripcion:"VERMICELLI CON LE VONGOLE",
         precio:4000,
         ingredientes:"sofrito de ajo, aceite de oliva virgen, vino blanco, almejas y tomate",
@@ -66,7 +58,6 @@ export const productos=[
         estado:1,
     } , 
     {
-        id:9,
         descripcion:" Risotto alla milanese",
         precio:5000,
         ingredientes:"tuétano de buey, cebolla, caldo de carne, mantequilla,hebras de azafrán, vino blanco, pimienta, sal y el arroz",
@@ -74,7 +65,6 @@ export const productos=[
         estado:1,
     } ,
     {
-        id:10,
         descripcion:"pesto alla genovese",
         precio:5000,
         ingredientes:" ajo, albahaca, piñones, queso parmesano rallado y aceite de oliva virgen",
@@ -82,7 +72,6 @@ export const productos=[
         estado:1,
     }, 
     {
-        id:11,
         descripcion:"Aceitunas con naranja y limón",
         precio:2000,
         ingredientes:"aceitunas,ralladuras de naranja y de limón, el chalote, la canela y las semillas tostadas.",
@@ -90,6 +79,6 @@ export const productos=[
         estado:1,
     } 
     
-
+*/
 
 ]

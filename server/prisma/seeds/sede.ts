@@ -1,4 +1,4 @@
-export const sede = [
+export const sedes = [
     //1
     {
         id:1,

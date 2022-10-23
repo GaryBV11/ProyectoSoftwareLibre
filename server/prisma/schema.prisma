@@ -11,6 +11,26 @@ datasource db {
 }
 
 
+//Seguridad
+enum rol {
+cliente
+mesero
+administrador
+}
+
+model usuario {
+id String @id 
+nombre String
+apellido1 String
+apellido2 String
+telefono String
+deleted Boolean @default(false)
+rol rol @default(cliente)
+idSede Int?
+sede sede? @relation(fields: [idSede],references: [id])
+comandas comanda[]
+}
+
 //Restaurantes
 
 enum categoriaProducto {
@@ -68,7 +88,7 @@ enum estadoComanda {
 
 model comanda {
 id Int @id @default(autoincrement())
-idUsuario Int
+idUsuario String
 estado estadoComanda
 direccion String?
 nota String?
@@ -77,6 +97,7 @@ impuesto Decimal
 total Decimal
 idMesa Int?
 mesa mesa? @relation(fields: [idMesa],references: [id])
+usuario usuario @relation(fields: [idUsuario],references: [id])
 detallesComanda detalleComanda[]
 detallesPago detallePago[]
 }
@@ -104,21 +125,3 @@ model detalleComanda {
 }
 
 
-//Seguridad
-enum rol {
-cliente
-mesero
-administrador
-}
-
-model usuario {
-id String @id 
-nombre String
-apellido1 String
-apellido2 String
-telefono String
-deleted Boolean @default(false)
-rol rol @default(cliente)
-idSede Int?
-sede sede? @relation(fields: [idSede],references: [id])
-}

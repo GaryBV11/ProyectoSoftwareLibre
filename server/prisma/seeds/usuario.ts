@@ -3,26 +3,27 @@ import {sede } from "@prisma/client";
 export const usuarios = [
     //1
     {
-     id:208100007,
+     id:"208100007",
      nombre:"Rolando",
      apellido1:"Castro",
      apellido2:"Castro",
      telefono:"84657852",
      rol:rol.administrador,
-     idsede:1,
+     idSede: 1,
+     
     },
     //2
     {
-        id:106580358,
+        id:"106580358",
         nombre:"Keyner",
         apellido1:"Porras",
         apellido2:"Castro",
         telefono:"85655685",
         rol:rol.mesero,
-        idsede:1,
+        idSede:1,
        },
     //3
-    {
+  /*  {
         id:208100007,
         nombre:"Genesis",
         apellido1:"Porras",
@@ -90,5 +91,5 @@ export const usuarios = [
         telefono:"8838382",
         rol:rol.mesero,
         idsede:3,
-       },
+       },*/
 ]
