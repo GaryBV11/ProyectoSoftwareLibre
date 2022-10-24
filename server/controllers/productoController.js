@@ -15,6 +15,9 @@ module.exports.getById = async (request, response, next) => {
   const producto = await prisma.producto.findUnique({
     where: {
       id: id,
+    },
+    include: {
+      sedes: true
     }
   });
   response.json(producto);

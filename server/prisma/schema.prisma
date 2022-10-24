@@ -42,7 +42,8 @@ entrada
 model sede {
 id Int @id @default(autoincrement())
 nombre String
-productos sedeProducto[]
+//productos sedeProducto[]
+productos producto[]
 mesas mesa[]
 usuarios usuario[]
 }
@@ -54,18 +55,20 @@ precio Decimal
 ingredientes String
 deleted Boolean @default(false)
 categoria categoriaProducto
-sedes sedeProducto[]
+//sedes sedeProducto[]
+sede sede[]
 estado Boolean
 comandas detalleComanda[]
 }
 
-model sedeProducto {
-idSede Int
-idProducto Int
-sede sede @relation(fields: [idSede],references: [id])
-producto producto @relation(fields: [idProducto],references: [id])
-@@id([idProducto, idSede])
-}
+
+//model sedeProducto {
+//idSede Int
+//idProducto Int
+//sede sede @relation(fields: [idSede],references: [id])
+//producto producto @relation(fields: [idProducto],references: [id])
+//@@id([idProducto, idSede])
+//}
 
 
 model mesa {
