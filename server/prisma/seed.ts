@@ -3,18 +3,25 @@ import { usuarios } from './seeds/usuario';
 import { productos } from './seeds/producto';
 import { sedes } from './seeds/sede';
 
+
 const prisma = new PrismaClient();
 
 async function main() {
-  //Productos
-  await prisma.producto.createMany({
-    data: productos
-  });
 
   //Sedes
   await prisma.sede.createMany({
     data: sedes
   });
+
+  //Productos
+  //Llama al metodo proguctos de el archivo producto.ts para ejecutar los insert individuales
+  productos();
+  
+  /*await prisma.producto.createMany({
+    data: productos
+  });*/
+
+  
 
  // Usuarios
   await prisma.usuario.createMany({

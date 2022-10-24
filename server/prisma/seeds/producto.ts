@@ -1,5 +1,37 @@
-import {categoriaProducto} from "@prisma/client";
-import { connect } from "http2";
+import { categoriaProducto } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+
+export const productos = async () => {
+  const prisma = new PrismaClient();
+
+  await prisma.producto.create({
+    data: {
+      descripcion: "Pizza Napolitana",
+      precio: 8000,
+      ingredientes: "Salsa de tomate,jamon,queso",
+      categoria: categoriaProducto.platoPrincipal,
+      estado: false,
+      sedes: {
+        connect: [{ id: 1 }],
+      },
+    },
+  });
+
+  await prisma.producto.create({
+    data: {
+      descripcion: "Pizza Margherita",
+      precio: 6000,
+      ingredientes: " Queso mozzarella,tomate, aceite y albahaca",
+      categoria: categoriaProducto.platoPrincipal,
+      estado: true,
+      sedes: {
+        connect: [{ id: 2 }, { id: 3 }],
+      },
+    },
+  });
+};
+
+/*
 export const productos=[
     //1
     {
@@ -9,20 +41,18 @@ export const productos=[
         categoria:categoriaProducto.platoPrincipal,
         estado: false,
         sedes: {
-            connect:[
-               {idProducto_idSede:{idSede:1, idProducto:2}}
-            ]
+            connect:[{id:1}]       
      }
-    },
-    {
+    },*/
+/* {
         descripcion:"Pizza Margherita",
         precio:6000,
         ingredientes:" Queso mozzarella,tomate, aceite y albahaca",
         categoria:categoriaProducto.platoPrincipal,
         estado: true,
         sede:1,
-    },
-  /*  {
+    },*/
+/*  {
         descripcion:"pizza Quattro Stagioni",
         precio:12000,
         ingredientes:"jamón cocido, setas, alcachofas y aceitunas negra",
@@ -87,5 +117,3 @@ export const productos=[
     } 
     
 */
-
-]
