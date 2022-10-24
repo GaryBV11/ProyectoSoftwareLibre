@@ -8,6 +8,8 @@ const mesaController = require("../controllers/mesaController");
 //Definición de rutas para generos
 
 
+router.get("/", mesaController.get);
+
 router.get("/:id", mesaController.getById);
 
 router.get("/sede/:id", mesaController.getById);

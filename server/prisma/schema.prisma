@@ -56,7 +56,7 @@ ingredientes String
 deleted Boolean @default(false)
 categoria categoriaProducto
 //sedes sedeProducto[]
-sede sede[]
+sedes sede[]
 estado Boolean
 comandas detalleComanda[]
 }

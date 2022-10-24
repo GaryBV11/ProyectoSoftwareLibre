@@ -2,14 +2,14 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-/*module.exports.get = async (request, response, next) => {
+module.exports.get = async (request, response, next) => {
   const comandas = await prisma.comanda.findMany({
     orderBy: {
       id: "asc",
     },
   });
   response.json(comandas);
-};*/
+};
 
 module.exports.getById = async (request, response, next) => {
   let id = parseInt(request.params.id);
@@ -22,7 +22,7 @@ module.exports.getById = async (request, response, next) => {
       detallesComanda: {
         select: {
           idComanda: false,
-          idProducto: false,
+          Producto: true,
           cantidad: true,
         },
         include: {
