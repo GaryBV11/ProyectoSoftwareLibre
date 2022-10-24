@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,17 +8,24 @@ import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
 import { ComandaModule } from './comanda/comanda.module';
 
+import { UsuarioModule } from './usuario/usuario.module';
+
+import { ShareModule } from './share/share.module';
+
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    HomeModule,
+    HttpClientModule ,
+ 
     CoreModule,
-    ComandaModule
+    ShareModule,
+    HomeModule,
+   
+    ComandaModule,
+    UsuarioModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

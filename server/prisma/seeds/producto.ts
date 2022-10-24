@@ -1,4 +1,5 @@
 import {categoriaProducto} from "@prisma/client";
+import { connect } from "http2";
 export const productos=[
     //1
     {
@@ -7,6 +8,11 @@ export const productos=[
         ingredientes:"Salsa de tomate,jamon,queso",
         categoria:categoriaProducto.platoPrincipal,
         estado: false,
+        sedes: {
+            connect:[
+               {idProducto_idSede:{idSede:1, idProducto:2}}
+            ]
+     }
     },
     {
         descripcion:"Pizza Margherita",
@@ -14,6 +20,7 @@ export const productos=[
         ingredientes:" Queso mozzarella,tomate, aceite y albahaca",
         categoria:categoriaProducto.platoPrincipal,
         estado: true,
+        sede:1,
     },
   /*  {
         descripcion:"pizza Quattro Stagioni",
