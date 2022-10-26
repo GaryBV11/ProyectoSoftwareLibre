@@ -1,0 +1,42 @@
+
+<div id="contenedor-titulo">
+    <h1>Gestión de mesas </h1>
+</div>
+<form [formGroup]="sedesForm">
+  <div id="contenedor-select-sedes">
+    <h4>Sede:</h4>
+<mat-form-field appearance="fill" color="accent">
+    <mat-label>Sede</mat-label>
+    <mat-select  formControlName="sede" (selectionChange)="onChange()">
+      <mat-option *ngFor="let sede of sedesList" [value]="sede.id">
+        {{sede.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+</form>
+
+
+<div class="contenedor-cards" *ngIf="mesasList" >
+
+  <mat-card *ngFor="let mesa of mesasList" color="primary"class="example-card">
+    <mat-card-header class="mat-card-header">
+      <mat-card-title class="mat-card-title"> {{mesa.codigo}}</mat-card-title>
+    </mat-card-header>
+    <img  mat-card-image class="imagen-card" src="../../../assets/IMG/Mesa.jpg" alt="Foto mesa">
+    <mat-card-content>
+      <p>
+        Capacidad: {{mesa.capacidad}} personas<br>
+      </p>
+      <p>Estado: {{mesa.estado}}</p>
+    </mat-card-content>
+    <mat-card-actions class="mat-card-actions">
+        <button mat-mini-fab color="warn" aria-label="Detalles"  title="Ver más detalles"   (click)="detalleMesa(mesa.id)">
+          <mat-icon>add_circle</mat-icon>
+        </button> 
+    </mat-card-actions>
+  </mat-card>
+ 
+</div>
+
+

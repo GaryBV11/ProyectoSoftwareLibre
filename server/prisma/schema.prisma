@@ -68,12 +68,20 @@ comandas detalleComanda[]
 //producto producto @relation(fields: [idProducto],references: [id])
 //@@id([idProducto, idSede])
 //}
-
+enum estadoMesa {
+  libre
+  inactiva
+  reservada
+  ocupada
+cuentaPendiente
+comandaRegistrada
+  
+}
 
 model mesa {
 id Int @id @default(autoincrement())
 codigo String
-estado Boolean
+estado estadoMesa
 capacidad Int
 idSede Int
 comandas comanda[]

@@ -1,0 +1,18 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="primary">close</mat-icon>
+  </button>
+<div *ngIf="datos">
+<h2 mat-dialog-title id="titulo-detalle"> Detalles mesa</h2>
+
+<mat-dialog-content >
+  <p>Código: {{datos.codigo}}</p>
+ <p>Capacidad: {{datos.capacidad}}</p>
+ <p>Estado: {{datos.estado}}</p>
+ <p>Sede: {{datos.sede.nombre}}</p>
+ 
+</mat-dialog-content>
+
+<mat-dialog-actions>
+   
+</mat-dialog-actions>
+</div>

@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './home/home.module';
 import { CoreModule } from './core/core.module';
-import { ComandaModule } from './comanda/comanda.module';
+
 
 import { UsuarioModule } from './usuario/usuario.module';
 
 import { ShareModule } from './share/share.module';
+import { MesaModule } from './mesa/mesa.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,9 +24,11 @@ import { ShareModule } from './share/share.module';
     ShareModule,
     HomeModule,
    
-    ComandaModule,
+
     UsuarioModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MesaModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

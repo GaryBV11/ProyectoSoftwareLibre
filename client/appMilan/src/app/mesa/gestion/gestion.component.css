@@ -49,6 +49,12 @@
     border-bottom: 3px solid #009246;
    }
 
+   h4 {
+    padding-top: 15px;
+    font-family: 'Cinzel', serif;
+    font-size: 19px;
+    margin-right: 10px;
+   }
   .contenedor-cards {
     margin: 0 auto;
     display: flex;
@@ -56,4 +62,9 @@
     gap: 30px;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  #contenedor-select-sedes {
+    display: flex;
+    justify-content: center;
   }

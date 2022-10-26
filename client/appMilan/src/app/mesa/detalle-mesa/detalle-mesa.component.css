@@ -1,0 +1,19 @@
+
+  p {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+  }
+
+  h2 {
+    display: inline-block ;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 25px;
+    color: #ce2b37;
+    border-bottom: 3px solid #009246;
+   }
+
+   #titulo-detalle {
+    width: 100%;
+   }
