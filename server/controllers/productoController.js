@@ -7,6 +7,9 @@ module.exports.get = async (request, response, next) => {
     orderBy: {
       id: "asc",
     },
+    include: {
+      sedes: true
+    }
   });
   response.json(productos);
 };
