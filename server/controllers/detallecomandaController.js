@@ -4,11 +4,11 @@ const prisma = new PrismaClient();
 
 
 
-module.exports.getById = async (request, response, next) => {
+module.exports.getByComanda = async (request, response, next) => {
     let id = parseInt(request.params.id);
-    const detallecomanda = await prisma.detalleComanda.findUnique({
+    const detallecomanda = await prisma.detalleComanda.findMany({
       where: {
-        id: id,
+        idComanda: id
       },
       include: {
         producto: true,
