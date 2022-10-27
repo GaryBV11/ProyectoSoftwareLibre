@@ -20,7 +20,7 @@ async function main() {
  
   //Productos
   //Llama al metodo proguctos de el archivo producto.ts para ejecutar los insert individuales
- productos();
+ await productos();
   
  // Usuarios
   await prisma.usuario.createMany({

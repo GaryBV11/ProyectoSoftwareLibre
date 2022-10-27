@@ -13,16 +13,16 @@ export const comandasDetalles = [
         idProducto:2,
         cantidad:1,
     },
-    //  //3
-    //  {
-    //     idComanda:3,
-    //     idProducto:3,
-    //     cantidad:1,
-    // },
-    //  //4
-    //  {
-    //     idComanda:4,
-    //     idProducto:4,
-    //     cantidad:1,
-    // },
+     //3
+     {
+        idComanda:3,
+        idProducto:3,
+        cantidad:1,
+    },
+     //4
+     {
+        idComanda:4,
+        idProducto:4,
+        cantidad:1,
+    },
 ]

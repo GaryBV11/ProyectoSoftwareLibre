@@ -14,23 +14,45 @@ import {estadoMesa } from "@prisma/client";
 export const mesas = [
 //1
 {
-    codigo: "Mesa familiar",
+    codigo: "C01",
     estado:estadoMesa.libre,
     capacidad:4,
     idSede:1,
    
 },
+{
+    codigo: "C02",
+    estado:estadoMesa.reservada,
+    capacidad:4,
+    idSede:1,
+   
+},
+{
+    codigo: "C03",
+    estado:estadoMesa.ocupada,
+    capacidad:2,
+    idSede:1,
+   
+},
+
 //2
 {
-    codigo: "Mesa Individual",
+    codigo: "S01",
     estado:estadoMesa.libre,
     capacidad:1,
     idSede:4,
     
 },
+{
+    codigo: "S02",
+    estado:estadoMesa.ocupada,
+    capacidad:2,
+    idSede:4,
+    
+},
 //3
 {
-    codigo: "Mesa Pareja",
+    codigo: "O01",
     estado:estadoMesa.libre,
     capacidad:2,
     idSede:2,
@@ -38,7 +60,7 @@ export const mesas = [
 },
 //4
 {
-    codigo: "Barra libre",
+    codigo: "E01",
     estado:estadoMesa.libre,
     capacidad:1,
     idSede:3,
