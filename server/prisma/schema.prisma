@@ -57,6 +57,7 @@ deleted Boolean @default(false)
 categoria categoriaProducto
 //sedes sedeProducto[]
 estado Boolean
+imagenURL String
 sedes sede[]
 comandas detalleComanda[]
 }

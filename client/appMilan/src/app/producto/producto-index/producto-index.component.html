@@ -1,0 +1,45 @@
+<div class="grid-container">
+  <div id="contenedor-titulo">
+    <h1>Productos</h1>
+</div>
+    <mat-grid-list [cols]="3" rowHeight="24em" gutterSize="12px" *ngIf="datos" style="text-align:center;">
+      <mat-grid-tile *ngFor="let item of datos" >
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{item.descripcion}}
+            </mat-card-title>
+          </mat-card-header>
+          <img mat-card-lg-image src="{{item.imagenURL}}" alt="imagen" style="margin: 0 auto ;" >
+          <mat-card-content class="dashboard-card-content">
+            <div>
+              Precio: {{
+               item.precio | currency: "USD" 
+            }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <div> Ingredientes:{{
+              item.ingredientes 
+            }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <div>{{
+              item.categoria
+            }}</div>
+          </mat-card-content>
+          <mat-divider inset></mat-divider>
+          <!-- <mat-card-actions>
+            <button
+            mat-mini-fab color="accent"
+            matTooltip="Detalle Videjuego"
+            aria-label="Detalle Videjuego"
+            color="primary"
+            (click)="detalleVideojuego(item.id)"
+          >
+          <mat-icon class="mat-18">info</mat-icon>
+          </button>
+          </mat-card-actions> -->
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>

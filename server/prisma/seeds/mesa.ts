@@ -25,7 +25,7 @@ export const mesas = [
     codigo: "Mesa Individual",
     estado:estadoMesa.libre,
     capacidad:1,
-    idSede:1,
+    idSede:4,
     
 },
 //3
@@ -36,7 +36,7 @@ export const mesas = [
     idSede:2,
 
 },
-//2
+//4
 {
     codigo: "Barra libre",
     estado:estadoMesa.libre,

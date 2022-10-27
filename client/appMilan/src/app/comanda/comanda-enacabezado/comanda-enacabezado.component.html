@@ -1,0 +1,57 @@
+<div class="grid-container">
+  <div id="contenedor-titulo">
+    <h1>Comandas </h1>
+    </div>
+    <mat-grid-list [cols]="3" rowHeight="24em" gutterSize="12px" *ngIf="datos" style="text-align:center;">
+      <mat-grid-tile *ngFor="let item of datos" >
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{item.id}}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <div>
+               {{
+                item.usuario.nombre
+            }} {{
+              item.usuario.apellido1
+          }} {{
+            item.usuario.apellido2
+        }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <div> {{
+              item.usuario.rol
+            }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <div>Sub Total: {{
+              item.subTotal
+            }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <div> Impuesto: {{
+              item.impuesto
+            }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <div> Total: {{
+              item.total
+            }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <div>{{
+              item.estado
+            }}</div>
+          </mat-card-content>
+          <mat-divider inset></mat-divider>
+           <mat-card-actions>
+            <button mat-mini-fab color="warn" aria-label="Detalle"  title="Detalle"   (click)="comandaDetalle(item.id)">
+              <mat-icon>add_circle</mat-icon>
+        </button> 
+          </mat-card-actions> 
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>

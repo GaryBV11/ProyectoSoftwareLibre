@@ -20,76 +20,76 @@ export const usuarios = [
         apellido2:"Castro",
         telefono:"85655685",
         rol:rol.mesero,
-        idSede:1,
+        idSede: 1,
        },
     //3
-  /*  {
-        id:208100007,
+    {
+        id:"208109907",
         nombre:"Genesis",
         apellido1:"Porras",
         apellido2:"Cruz",
         telefono:"122345678",
         rol:rol.cliente,
-        idsede:1,
+        idSede: 2,
        },
     //3
     {
-        id:208100007,
+        id:"48584516",
         nombre:"Fabian",
         apellido1:"Solis",
         apellido2:"Jimenez",
         telefono:"89562336",
         rol:rol.administrador,
-        idsede:2,
+        idSede: 3,
        },
     //3
     {
-        id:208100007,
+        id:"48459757",
         nombre:"Maria",
         apellido1:"Avila",
         apellido2:"Avarca",
         telefono:"95175364",
         rol:rol.mesero,
-        idsede:2,
+        idSede: 3,
        },
        //1
     {
-        id:96385241,
+        id:"96385241",
         nombre:"Kevin",
         apellido1:"Castro",
         apellido2:"Barrantes",
         telefono:"789456123",
         rol:rol.mesero,
-        idsede:2,
+        idSede: 4,
        },
     //1
     {
-        id:208100007,
+        id:"741852963",
         nombre:"Esteban",
         apellido1:"Salazar",
         apellido2:"Alvarado",
         telefono:"78936521",
         rol:rol.administrador,
-        idsede:3,
+        idSede: 4,
        },
        //1
     {
-        id:304570878,
+        id:"304570878",
         nombre:"Jefry",
         apellido1:"Dahmer",
         apellido2:"Ortiz",
         telefono:"8665565",
         rol:rol.mesero,
-        idsede:3,
+        idSede: 5,
        },
        //1
     {
-        id:208100007,
+        id:"2081000072",
         nombre:"Sofia",
         apellido1:"Salgado",
         apellido2:"Flores",
         telefono:"8838382",
         rol:rol.mesero,
-        idsede:3,
-       },*/
+        idSede: 1,
+       },
 ]

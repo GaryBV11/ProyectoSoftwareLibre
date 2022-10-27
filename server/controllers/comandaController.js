@@ -6,6 +6,15 @@ module.exports.get = async (request, response, next) => {
   const comandas = await prisma.comanda.findMany({
     orderBy: {
       id: "asc",
+    },include: {
+      usuario: true,
+      detallesComanda: {
+        select: {
+          idComanda: false,
+          producto: true,
+          cantidad: true,
+        },
+      },
     },
   });
   response.json(comandas);
