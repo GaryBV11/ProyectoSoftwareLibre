@@ -31,4 +31,7 @@
     margin-bottom: 30px;
     text-align: center;
   }
+  .mat-card-header {
+    justify-content: center;
+  }
   

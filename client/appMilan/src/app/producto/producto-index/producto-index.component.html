@@ -2,11 +2,11 @@
   <div id="contenedor-titulo">
     <h1>Productos</h1>
 </div>
-    <mat-grid-list [cols]="3" rowHeight="24em" gutterSize="12px" *ngIf="datos" style="text-align:center;">
+    <mat-grid-list [cols]="3" rowHeight="35em" gutterSize="12px" *ngIf="datos" style="text-align:center;">
       <mat-grid-tile *ngFor="let item of datos" >
         <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
+          <mat-card-header class="mat-card-header">
+           <mat-card-title class="mat-card-title">
               {{item.descripcion}}
             </mat-card-title>
           </mat-card-header>
@@ -26,6 +26,10 @@
             <div>{{
               item.categoria
             }}</div>
+          </mat-card-content>
+          <mat-card-content class="dashboard-card-content">
+            <p>Disponible en:</p>
+            <div *ngFor="let sede of item.sedes"> {{sede.nombre}}</div>
           </mat-card-content>
           <mat-divider inset></mat-divider>
           <!-- <mat-card-actions>
