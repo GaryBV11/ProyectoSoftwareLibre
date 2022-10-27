@@ -18,15 +18,13 @@ module.exports.getById = async (request, response, next) => {
       id: id,
     },
     include: {
-      Usuario: true,
+      usuario: true,
       detallesComanda: {
         select: {
           idComanda: false,
-          Producto: true,
-          cantidad: true,
-        },
-        include: {
           producto: true,
+          cantidad: true,
+          producto: true
         },
       },    
     },

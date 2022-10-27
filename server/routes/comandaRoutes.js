@@ -8,7 +8,7 @@ const detalleComandaController = require("../controllers/detallecomandaControlle
 const detallePagoController = require("../controllers/detallepagoController");
 
 //Definición de rutas para generos
-
+router.get("/", comandaController.get);
 router.get("/:id", comandaController.getById);
 router.get("/detalle/:id", detalleComandaController.getById);
 router.get("/pago/:id", detallePagoController.getById);
