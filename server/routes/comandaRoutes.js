@@ -11,7 +11,7 @@ const detallePagoController = require("../controllers/detallepagoController");
 router.get("/", comandaController.get);
 router.get("/:id", comandaController.getById);
 router.get("/detalle/:id", detalleComandaController.getById);
-router.get("/pago/:id", detallePagoController.getById);
+router.get("/pagos/:id", detallePagoController.getByComanda);
 router.get("/pago/:id", detallePagoController.getById);
 
 module.exports = router;
