@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
-import { ComandaDetalleComponent } from '../../comanda-detalle/comanda-detalle.component';
+import { ComandaDetalleComponent } from '../comanda-detalle/comanda-detalle.component';
 
 @Component({
   selector: 'app-comanda-enacabezado',

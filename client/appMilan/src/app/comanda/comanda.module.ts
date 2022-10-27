@@ -8,10 +8,10 @@ import { MatButtonModule } from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import { ComandaEnacabezadoComponent } from './comanda-enacabezado/comanda-enacabezado.component';
 import { ComandaRoutingModule } from './comanda-routing.module';
-import { ComandaDetalleComponent } from '../comanda-detalle/comanda-detalle.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ReactiveFormsModule } from '@angular/forms';
+import { ComandaDetalleComponent } from './comanda-detalle/comanda-detalle.component';
 
 @NgModule({
   declarations: [
