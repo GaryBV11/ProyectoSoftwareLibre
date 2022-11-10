@@ -37,3 +37,55 @@ module.exports.getBySede = async (request, response, next) => {
   });
   response.json(mesas);
 };
+
+
+//Crear un mesa
+module.exports.create = async (request, response, next) => {
+  let mesa = request.body;
+  let countCodigo =  await prisma.mesa.count({
+    where: {
+      idSede: mesa.idSede
+    }
+    
+  }) + 1;
+console.log(countCodigo);
+  let sede = await prisma.sede.findUnique({
+    where: {
+      id: mesa.idSede
+    }
+  });
+  let codigoGenerado = `${sede.nombre.charAt(0)}${countCodigo < 10?0:''}${countCodigo}`;
+  const newMesa = await prisma.mesa.create({
+    data: {
+      codigo: codigoGenerado,
+      capacidad: parseInt(mesa.capacidad),
+      estado: mesa.estado,
+      idSede: mesa.idSede,
+     
+    },
+  });
+  response.json(newMesa);
+};
+
+//Actualizar un mesa
+module.exports.update = async (request, response, next) => {
+  let mesa = request.body;
+  let idMesa = parseInt(request.params.id);
+  /*//Obtener mesa vieja
+  const mesaVieja = await prisma.mesa.findUnique({
+    where: { id: idMesa },
+  });*/
+const newmesa = await prisma.mesa.update({
+  where: {
+    id: idMesa,
+  },
+  data: {
+    codigo: mesa.codigo,
+    capacidad: parseInt(mesa.capacidad),
+    idSede: mesa.idSede,
+    estado: mesa.estado,
+  },
+});
+response.json(newmesa);
+};
+

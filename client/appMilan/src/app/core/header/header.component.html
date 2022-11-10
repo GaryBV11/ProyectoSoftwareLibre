@@ -3,7 +3,7 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>
+    <button mat-menu-item  [routerLink]="'/'" [routerLinkActive]="'mat-raised-button'">
       <mat-icon>home</mat-icon>
       <span>Inicio</span>
     </button>
@@ -25,6 +25,10 @@
       <mat-icon>engineering</mat-icon>Mantenimientos
     </button>
     <mat-menu #mantenimientos="matMenu">
+      <button mat-menu-item [routerLink]="'mesas/gestion'" [routerLinkActive]="'mat-raised-button'">
+        <mat-icon>table_bar</mat-icon>
+        <span>Mesas</span>
+      </button>
       <button mat-menu-item>
         <mat-icon>group</mat-icon>
         <span>Usuarios</span>
@@ -40,7 +44,7 @@
       <span>Reportes</span>
     </button>
 
-    <button mat-menu-item>
+    <button mat-menu-item [routerLink]="'/acerca-de'" [routerLinkActive]="'mat-raised-button'">
       <mat-icon>help</mat-icon>
       <span>Acerca de</span>
     </button>

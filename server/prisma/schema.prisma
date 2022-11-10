@@ -69,7 +69,7 @@ comandas detalleComanda[]
 //producto producto @relation(fields: [idProducto],references: [id])
 //@@id([idProducto, idSede])
 //}
-enum estadoMesa {
+ enum estadoMesa {
   libre
   inactiva
   reservada

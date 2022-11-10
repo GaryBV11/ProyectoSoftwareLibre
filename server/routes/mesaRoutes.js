@@ -10,7 +10,11 @@ const mesaController = require("../controllers/mesaController");
 
 router.get("/", mesaController.get);
 
+router.post("/",mesaController.create);
+
 router.get("/:id", mesaController.getById);
+
+router.put("/:id",mesaController.update);
 
 router.get("/sede/:id", mesaController.getBySede);
 module.exports = router;

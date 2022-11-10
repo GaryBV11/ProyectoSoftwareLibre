@@ -1,0 +1,60 @@
+<form [formGroup]="mesaForm" (ngSubmit)="isCreate ? crearMesa(): actualizarMesa()">
+  <input type="hidden" formControlName="id" />
+  <input  type="hidden" formControlName="codigo">    
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>{{ titleForm }} Mesa</mat-card-title>
+    </mat-card-header>
+      <mat-card-content>
+
+      
+ 
+         
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="full-width">
+                <input matInput #capacidad  placeholder="Capacidad" formControlName="capacidad">    
+            </mat-form-field>
+            <mat-error *ngIf="mesaForm.controls['capacidad'].hasError('required')">
+              Capacidad es <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="mesaForm.controls['capacidad'].hasError('pattern')">
+              Capacidad no cumple el formato
+            </mat-error>
+            </div>
+        </div>
+         
+
+        <div class="row">
+            <div class="col" *ngIf="sedesList">
+                <mat-form-field class="full-width">
+                  <mat-select placeholder="Sede" formControlName="idSede">
+                    <mat-option *ngFor="let s of sedesList" [value]="s.id">
+                      {{ s.nombre }}
+                    </mat-option>
+                  </mat-select>            
+                </mat-form-field>
+              </div>
+        </div>
+
+             
+
+        <div class="row">
+        <div class="col" *ngIf="estadosList">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Estado" formControlName="estado">
+                <mat-option *ngFor="let e of estadosList" [value]="e">
+                  {{ e }}
+                </mat-option>
+              </mat-select>            
+            </mat-form-field>
+          </div>
+    </div>
+
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="accent" type="submit">Guardar</button>
+      </mat-card-actions>
+  </mat-card>
+</form>

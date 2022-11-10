@@ -1,38 +1,38 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap");
 
 .example-card {
-    max-width: 250px;
-    min-width: 250px;
-    background-color: #292a31;
-  }
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
+  max-width: 250px;
+  min-width: 250px;
+  background-color: #292a31;
+}
 
-  .mat-card-header {
-    justify-content: center;
-  }
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
 
-  .mat-card-title {
-    color: #FFFFFF ;
-    font-family: 'Cinzel', serif;
-  }
+.mat-card-header {
+  justify-content: center;
+}
 
-  .mat-card-actions {
-    text-align: center;
-  }
+.mat-card-title {
+  color: #ffffff;
+  font-family: "Cinzel", serif;
+}
+
+.mat-card-actions {
+  text-align: center;
+}
 
 .imagen-card {
   height: 200px;
 }
 
-  p {
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    color: #FFFFFF ;
-  }
+p {
+  text-align: center;
+  font-family: "Cinzel", serif;
+  color: #ffffff;
+}
 
 #contenedor-titulo {
   margin-top: 30px;
@@ -40,31 +40,46 @@
   text-align: center;
 }
 
-  h1 {
-    display: inline-block ;
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-size: 30px;
-    color: #ce2b37;
-    border-bottom: 3px solid #009246;
-   }
+h1 {
+  display: inline-block;
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 30px;
+  color: #ce2b37;
+  border-bottom: 3px solid #009246;
+}
 
-   h4 {
-    padding-top: 15px;
-    font-family: 'Cinzel', serif;
-    font-size: 19px;
-    margin-right: 10px;
-   }
-  .contenedor-cards {
-    margin: 0 auto;
-    display: flex;
-    width: 90%;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+h4 {
+  padding-top: 15px;
+  font-family: "Cinzel", serif;
+  font-size: 19px;
+  margin-right: 10px;
+}
+.contenedor-cards {
+  margin: 0 auto;
+  display: flex;
+  width: 90%;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#contenedor-form {
+  display: flex;
+  justify-content: center;
+}
 
-  #contenedor-select-sedes {
-    display: flex;
-    justify-content: center;
-  }
+#contenedor-select-sedes {
+  display: flex;
+  margin-right: 20px;
+}
+
+#boton-agregar {
+  width: 55px;
+  height: 55px;
+}
+
+#boton-agregar .mat-icon {
+  width: 50px;
+  height: 30px;
+  font-size: 30px;
+}

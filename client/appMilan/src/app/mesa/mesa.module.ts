@@ -10,12 +10,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ReactiveFormsModule } from '@angular/forms';
 import { DetalleMesaComponent } from './detalle-mesa/detalle-mesa.component';
+import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
+import { MatInputModule } from '@angular/material/input';
+
 
 
 @NgModule({
   declarations: [
     GestionComponent,
-    DetalleMesaComponent
+    DetalleMesaComponent,
+    MantenimientoComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +29,8 @@ import { DetalleMesaComponent } from './detalle-mesa/detalle-mesa.component';
     MatSelectModule,
     MatDialogModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule
 
   ]
 })

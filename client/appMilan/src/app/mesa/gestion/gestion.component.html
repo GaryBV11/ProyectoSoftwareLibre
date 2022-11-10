@@ -2,6 +2,7 @@
 <div id="contenedor-titulo">
     <h1>Gestión de mesas </h1>
 </div>
+<div id="contenedor-form">
 <form [formGroup]="sedesForm">
   <div id="contenedor-select-sedes">
     <h4>Sede:</h4>
@@ -15,6 +16,10 @@
   </mat-form-field>
 </div>
 </form>
+<button id="boton-agregar" mat-mini-fab color="accent" aria-label="Agregar"  title="Agregar mesa"  (click)="crearMesa()" >
+  <mat-icon>add_circle</mat-icon>
+</button> 
+</div>
 
 
 <div class="contenedor-cards" *ngIf="mesasList" >
@@ -31,8 +36,11 @@
       <p>Estado: {{mesa.estado}}</p>
     </mat-card-content>
     <mat-card-actions class="mat-card-actions">
-        <button mat-mini-fab color="warn" aria-label="Detalles"  title="Ver más detalles"   (click)="detalleMesa(mesa.id)">
-          <mat-icon>add_circle</mat-icon>
+        <button mat-mini-fab color="accent" aria-label="Detalles"  title="Ver más detalles"   (click)="detalleMesa(mesa.id)">
+          <mat-icon>description</mat-icon>
+        </button> 
+        <button mat-mini-fab color="accent" aria-label="Editar"  title="Editar"   (click)="actualizarMesa(mesa.id)">
+          <mat-icon>edit</mat-icon>
         </button> 
     </mat-card-actions>
   </mat-card>
