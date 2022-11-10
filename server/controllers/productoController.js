@@ -38,3 +38,58 @@ module.exports.getBySede = async (request, response, next) => {
   });
   response.json(productos);
 };
+
+module.exports.create=async(request, response, next)=>{
+  let producto= request.body;
+  const newproducto= await prisma.producto.create({
+    data:{
+      descripcion:producto.descripcion,
+      precio:producto.precio,
+      ingredientes:producto.ingredientes,
+      categoria:producto.categoria,
+      estado:producto.estado,
+      imagenURL:producto.imagenURL,
+      sedes:{
+        connect: producto.sedes
+
+      }
+    }
+  });
+  response.json(newproducto);
+}
+
+module.exports.update = async (request, response, next) => {
+  let producto = request.body;
+  let idproducto = parseInt(request.params.id);
+  //Obtener producto viejo
+  const productoViejo = await prisma.producto.findUnique({
+    where: { id: idproducto },
+    include: {
+      sedes: {
+        select:{
+          id:true
+        }
+      }
+    }
+  });
+
+  const newproducto = await prisma.producto.update({
+    where: {
+      id: idproducto
+    },
+    data: {
+      descripcion:producto.descripcion,
+      precio:producto.precio,
+      ingredientes:producto.ingredientes,
+      categoria:producto.categoria,
+      estado:producto.estado,
+      imagenURL:producto.imagenURL,
+      sedes: {
+        //Sedes tiene que ser {id:valor}
+        disconnect:productoViejo.sedes,
+        connect: producto.sedes,
+      },
+    },
+  });
+  response.json(newproducto);
+};

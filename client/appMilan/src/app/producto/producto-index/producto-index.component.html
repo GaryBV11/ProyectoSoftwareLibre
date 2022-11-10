@@ -1,6 +1,10 @@
 <div class="grid-container">
   <div id="contenedor-titulo">
-    <h1>Productos</h1>
+    <h1>Productos</h1> 
+    <br>
+    <button mat-fab color="primary" (click)="agregarProducto()" >
+      <mat-icon>add</mat-icon>
+    </button>
 </div>
     <mat-grid-list [cols]="3" rowHeight="35em" gutterSize="12px" *ngIf="datos" style="text-align:center;">
       <mat-grid-tile *ngFor="let item of datos" >
@@ -32,17 +36,17 @@
             <div *ngFor="let sede of item.sedes"> {{sede.nombre}}</div>
           </mat-card-content>
           <mat-divider inset></mat-divider>
-          <!-- <mat-card-actions>
+          <mat-card-actions>
             <button
-            mat-mini-fab color="accent"
-            matTooltip="Detalle Videjuego"
-            aria-label="Detalle Videjuego"
-            color="primary"
-            (click)="detalleVideojuego(item.id)"
-          >
-          <mat-icon class="mat-18">info</mat-icon>
-          </button>
-          </mat-card-actions> -->
+                mat-mini-fab
+                matTooltip="Actualizar Producto"
+                aria-label="Actualizar Producto"
+                color="primary"
+                (click)="actualizarProducto(item.id)"
+              >
+                <mat-icon class="mat-18">edit</mat-icon>
+              </button>
+          </mat-card-actions>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
