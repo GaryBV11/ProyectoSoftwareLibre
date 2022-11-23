@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
@@ -25,17 +25,19 @@ export class MantenimientoComponent implements OnInit {
   mesaForm: FormGroup;
   idMesa: number = 0;
   isCreate: boolean = true;
-
+  accion: string;
   constructor(
     private fb: FormBuilder,
     private gService: GenericService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    /*private noti: NotificacionService*/
-  ) {
+    private dialogRef: MatDialogRef<MantenimientoComponent>
+  ) /*private noti: NotificacionService*/
+  {
     this.formularioReactive();
     this.obtenerSedes();
     this.obtenerEstados();
+
   }
 
   ngOnInit(): void {
@@ -55,7 +57,7 @@ export class MantenimientoComponent implements OnInit {
           this.mesaForm.setValue({
             id: this.mesaInfo.id,
             capacidad: this.mesaInfo.capacidad,
-           /* codigo: this.mesaInfo.codigo,*/
+            /* codigo: this.mesaInfo.codigo,*/
             idSede: this.mesaInfo.idSede,
             estado: this.mesaInfo.estado,
           });
@@ -140,7 +142,7 @@ export class MantenimientoComponent implements OnInit {
     //[null, Validators.required]
     this.mesaForm = this.fb.group({
       id: [null, null],
-    /* codigo: [null, Validators.compose([Validators.required])],*/
+      /* codigo: [null, Validators.compose([Validators.required])],*/
       idSede: [null, Validators.required],
       capacidad: [
         null,
@@ -167,8 +169,12 @@ export class MantenimientoComponent implements OnInit {
       .list('enum/estadosMesa')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        console.log(data);
         this.estadosList = data;
       });
+  }
+
+  close() {
+    this.accion = "asdasd";
+    this.dialogRef.close({data :'Cancel'});
   }
 }

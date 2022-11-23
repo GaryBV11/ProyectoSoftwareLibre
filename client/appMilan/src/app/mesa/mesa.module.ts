@@ -12,14 +12,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DetalleMesaComponent } from './detalle-mesa/detalle-mesa.component';
 import { MantenimientoComponent } from './mantenimiento/mantenimiento.component';
 import { MatInputModule } from '@angular/material/input';
-
+import { estadosMesaPipe } from 'src/app/pipes/pipes.module';
 
 
 @NgModule({
   declarations: [
     GestionComponent,
     DetalleMesaComponent,
-    MantenimientoComponent
+    MantenimientoComponent,
+    estadosMesaPipe
   ],
   imports: [
     CommonModule,

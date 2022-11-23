@@ -8,5 +8,6 @@ const enumController = require("../controllers/enumController");
 //Definición de rutas para generos
 
 
-router.get("/estadosMesa", enumController.get);
+router.get("/estadosMesa", enumController.getEstadosMesa);
+router.get("/roles", enumController.getRoles);
 module.exports = router;

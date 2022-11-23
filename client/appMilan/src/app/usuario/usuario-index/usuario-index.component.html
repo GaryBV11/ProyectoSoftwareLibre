@@ -1,11 +1,16 @@
-<mat-card class="full-width">
-    <!-- Title of an Card -->
+<mat-card >
+  <mat-card-title>
+   <p>Usuarios</p> 
+   <button id="boton-agregar" mat-mini-fab color="accent" aria-label="Agregar"  title="Agregar mesa"  (click)="crearUsuario()" >
+    <mat-icon>add_circle</mat-icon>
+  </button> 
+  </mat-card-title><!-- Title of an Card -->
     
     <mat-card-content>
       <div class="mat-elevation-z8"   
-      *ngIf="dataSourcee"
+      *ngIf="dataSource"
       >
-        <table mat-table [dataSource]="dataSourcee"
+        <table mat-table [dataSource]="dataSource"
          class="full-width-table"  matSort
          matSortStart="desc" aria-label="Elements">
           <!-- Columna Cedula -->
@@ -37,20 +42,36 @@
           <!-- Columna rol -->
           <ng-container matColumnDef="rol">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
-            <td mat-cell *matCellDef="let row">{{ row.rol }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.rol | rolPipe }}</td>
           </ng-container>
           <!-- Columna sede -->
-          <ng-container matColumnDef="idSede">
+          <ng-container matColumnDef="sede">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Sede</th>
-            <td mat-cell *matCellDef="let row">{{ row.idSede }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.sede.nombre}}</td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>Actualizar</th>
+            <td mat-cell *matCellDef="let row">
+              <button
+                mat-mini-fab
+                matTooltip="Actualizar Usuario"
+                aria-label="Actualizar Usuario"
+                color="accent"
+                (click)="actualizarUsuario(row.id)"
+              >
+                <mat-icon class="mat-18">edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
         </table>
   
         <mat-paginator
           #paginator
-          [length]="dataSourcee?.data?.length"
+          [length]="dataSource?.data?.length"
           [pageIndex]="0"
           [pageSize]="5"
           [pageSizeOptions]="[3, 5, 10]"

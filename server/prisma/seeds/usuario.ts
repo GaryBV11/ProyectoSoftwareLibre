@@ -25,7 +25,7 @@ export const usuarios = [
     //3
     {
         id:"208109907",
-        nombre:"Genesis",
+        nombre:"Michael",
         apellido1:"Porras",
         apellido2:"Cruz",
         telefono:"122345678",
@@ -85,7 +85,7 @@ export const usuarios = [
        //1
     {
         id:"2081000072",
-        nombre:"Sofia",
+        nombre:"Marta",
         apellido1:"Salgado",
         apellido2:"Flores",
         telefono:"8838382",

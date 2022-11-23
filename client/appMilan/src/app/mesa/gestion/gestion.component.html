@@ -33,7 +33,7 @@
       <p>
         Capacidad: {{mesa.capacidad}} personas<br>
       </p>
-      <p>Estado: {{mesa.estado}}</p>
+      <p>Estado: {{mesa.estado | estadosMesaPipe}}</p>
     </mat-card-content>
     <mat-card-actions class="mat-card-actions">
         <button mat-mini-fab color="accent" aria-label="Detalles"  title="Ver más detalles"   (click)="detalleMesa(mesa.id)">

@@ -76,7 +76,6 @@ comandas detalleComanda[]
   ocupada
 cuentaPendiente
 comandaRegistrada
-  
 }
 
 model mesa {
@@ -90,11 +89,11 @@ sede sede @relation(fields: [idSede],references: [id])
 }
 
 enum estadoComanda {
-  registrado
-  enProceso
-  pendiente
-  entregada
-  porPagar
+  registrado //cliente aparta
+  enProceso //está atendiendose
+  pendiente //Cliente llego y no ha sido atendido
+  entregada //finalizada pagado
+  porPagar //entregado sin pagar
 }
 
 model comanda {

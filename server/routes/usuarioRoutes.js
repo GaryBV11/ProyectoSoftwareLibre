@@ -10,4 +10,8 @@ router.get("/", usuarioController.get);
 
 router.get("/:id", usuarioController.getById);
 
+router.post("/",usuarioController.create);
+
+router.put("/:id",usuarioController.update);
+
 module.exports = router;

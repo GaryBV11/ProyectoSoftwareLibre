@@ -1,3 +1,8 @@
+
+
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="primary">close</mat-icon>
+</button>
 <form [formGroup]="mesaForm" (ngSubmit)="isCreate ? crearMesa(): actualizarMesa()">
   <input type="hidden" formControlName="id" />
   <input  type="hidden" formControlName="codigo">    
@@ -45,7 +50,7 @@
             <mat-form-field class="full-width">
               <mat-select placeholder="Estado" formControlName="estado">
                 <mat-option *ngFor="let e of estadosList" [value]="e">
-                  {{ e }}
+                  {{ e | estadosMesaPipe}}
                 </mat-option>
               </mat-select>            
             </mat-form-field>

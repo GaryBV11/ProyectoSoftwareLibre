@@ -24,7 +24,7 @@ export class GestionComponent implements OnInit {
     private gService: GenericService,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {
     this.formularioReactice();
     this.obtenerSedes();
@@ -67,6 +67,7 @@ export class GestionComponent implements OnInit {
   detalleMesa(id: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
+    dialogConfig.width = '40%';
     dialogConfig.data = {
       id: id,
     };
@@ -77,21 +78,21 @@ export class GestionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.width = '70%';
-
-    this.dialog.open(MantenimientoComponent, dialogConfig);
+    const dialogRef = this.dialog.open(MantenimientoComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      result => {console.log("Dialog output:",result);});    
   }
 
-
-
   actualizarMesa(id: number) {
-   /* this.router.navigate(['/mesas/update', id], {
+    /* this.router.navigate(['/mesas/update', id], {
       relativeTo: this.route,
     });*/
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.width = '70%';
-dialogConfig.data = {
-  id};
+    dialogConfig.data = {
+      id,
+    };
     this.dialog.open(MantenimientoComponent, dialogConfig);
   }
 }

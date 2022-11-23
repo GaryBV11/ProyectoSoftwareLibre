@@ -3,9 +3,11 @@ import { AfterViewInit} from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { GenericService } from 'src/app/share/generic.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsuarioMantenimientoComponent } from '../usuario-mantenimiento/usuario-mantenimiento.component';
 @Component({
   selector: 'app-usuario-index',
   templateUrl: './usuario-index.component.html',
@@ -17,13 +19,13 @@ export class UsuarioIndexComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  dataSourcee= new MatTableDataSource<any>();  
+  dataSource= new MatTableDataSource<any>();  
   // Columnas
-  displayedColumns = ['id', 'nombre','apellido1','apellido2','telefono','idSede','rol'];
+  displayedColumns = ['id', 'nombre','apellido1','apellido2','telefono','sede','rol','acciones'];
 
 
   constructor(private router: Router,
-    private route: ActivatedRoute,private gService:GenericService) { }
+    private route: ActivatedRoute,private gService:GenericService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.listaUsuario();
@@ -34,17 +36,35 @@ export class UsuarioIndexComponent implements OnInit {
       .list('usuario/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        console.log(data);
         this.datos = data;
-        this.dataSourcee= new MatTableDataSource(this.datos);
-        this.dataSourcee.sort = this.sort;
-        this.dataSourcee.paginator = this.paginator;
+        this.dataSource= new MatTableDataSource(this.datos);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
         
       });
   }
   ngOnDestroy(){
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
+  }
+
+  crearUsuario() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.width = '80%';
+    const dialogRef = this.dialog.open(UsuarioMantenimientoComponent, dialogConfig);
+  /*  dialogRef.afterClosed().subscribe(
+      result => {console.log("Dialog output:",result);});    */
+  }
+
+  actualizarUsuario(id: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.width = '80%';
+    dialogConfig.data = {
+      id,
+    };
+    const dialogRef = this.dialog.open(UsuarioMantenimientoComponent, dialogConfig);
   }
 
 }

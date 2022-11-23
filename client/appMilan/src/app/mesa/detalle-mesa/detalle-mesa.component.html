@@ -7,7 +7,7 @@
 <mat-dialog-content >
   <p>Código: {{datos.codigo}}</p>
  <p>Capacidad: {{datos.capacidad}}</p>
- <p>Estado: {{datos.estado}}</p>
+ <p>Estado: {{datos.estado | estadosMesaPipe}}</p>
  <p>Sede: {{datos.sede.nombre}}</p>
  
 </mat-dialog-content>
