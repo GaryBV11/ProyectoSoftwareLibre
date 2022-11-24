@@ -11,7 +11,7 @@
       <mat-icon>receipt_long</mat-icon>Ordenar
     </button>
     <mat-menu #ordenar="matMenu">
-      <button mat-menu-item>
+      <button mat-menu-item [routerLink]="'mesas/gestion'" [routerLinkActive]="'mat-raised-button'">
         <mat-icon>table_bar</mat-icon>
         <span>Reserva</span>
       </button>

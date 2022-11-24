@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DetalleMesaComponent } from '../detalle-mesa/detalle-mesa.component';
 import { MantenimientoComponent } from '../mantenimiento/mantenimiento.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DialogoConfirmacionComponent } from 'src/app/share/dialogo-confirmacion/dialogo-confirmacion.component';
 
 @Component({
   selector: 'app-gestion',
@@ -16,7 +17,9 @@ export class GestionComponent implements OnInit {
   sedesForm: FormGroup;
   sedesList: any;
   mesasList: any;
+  usuario: any;
   datos: any;
+  //isCancelable: boolean = true;
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
@@ -26,12 +29,20 @@ export class GestionComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.obtenerUsuario();
     this.formularioReactice();
     this.obtenerSedes();
+    console.log(this.usuario)
   }
 
   ngOnInit(): void {
     this.sedesForm;
+  
+  }
+
+  onChange() {
+    let idSede = this.sedesForm.get('sede').value;
+    this.obtenerMesasSede(idSede);
   }
 
   formularioReactice() {
@@ -40,13 +51,29 @@ export class GestionComponent implements OnInit {
     });
   }
 
+  obtenerUsuario() {
+    this.gService
+    .get('usuario', '2081000072') /*mesero*/
+      //.get('usuario', '208100007') /*admin */
+      //.get('usuario', '208109907') /*cliente */
+      //.get('usuario', '304570878') /*cliente */
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.usuario = data;
+ if (this.usuario.rol == 'mesero') { //Mesas para la sede a la que pertenece
+          this.obtenerMesasSede(this.usuario.idSede);
+             }
+      });
+
+  }
+
   obtenerSedes() {
     this.sedesList = null;
     this.gService
       .list('sede/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        this.sedesList = data;
+          this.sedesList = data;
       });
   }
 
@@ -55,13 +82,12 @@ export class GestionComponent implements OnInit {
       .get('mesa/sede', id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        this.mesasList = data;
+        if (this.usuario.rol != 'administrador') {
+          this.mesasList = data.filter(mesa => mesa.estado != 'inactiva');
+        } else {
+          this.mesasList = data;
+        }
       });
-  }
-
-  onChange() {
-    let idSede = this.sedesForm.get('sede').value;
-    this.obtenerMesasSede(idSede);
   }
 
   detalleMesa(id: number) {
@@ -79,14 +105,12 @@ export class GestionComponent implements OnInit {
     dialogConfig.disableClose = false;
     dialogConfig.width = '70%';
     const dialogRef = this.dialog.open(MantenimientoComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      result => {console.log("Dialog output:",result);});    
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('Dialog output:', result);
+    });
   }
 
   actualizarMesa(id: number) {
-    /* this.router.navigate(['/mesas/update', id], {
-      relativeTo: this.route,
-    });*/
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.width = '70%';
@@ -95,4 +119,60 @@ export class GestionComponent implements OnInit {
     };
     this.dialog.open(MantenimientoComponent, dialogConfig);
   }
+
+  reservarMesa(codigo: number, id: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.width = '40%';
+    dialogConfig.data = `¿Desea reservar la mesa ${codigo}?`;
+    this.dialog
+      .open(DialogoConfirmacionComponent, dialogConfig)
+      .afterClosed()
+      .subscribe((confirmado: Boolean) => {
+        if (confirmado) {
+          let respMesa, respComanda, newComanda;
+
+          this.gService
+            .get('mesa', id) //Obtiene mesa
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((mesa: any) => {
+              mesa.estado = 'reservada';
+
+              this.gService
+                .update('mesa', mesa) //actualiza mesa
+                .pipe(takeUntil(this.destroy$))
+                .subscribe((data: any) => {
+                  //Obtener respuesta
+                  respMesa = data;
+
+                  newComanda = {
+                    idMesa: id,
+                    idUsuario: this.usuario.id,
+                  };
+                  this.gService //Crear comanda
+                    .create('comanda', newComanda)
+                    .pipe(takeUntil(this.destroy$))
+                    .subscribe((data: any) => {
+                      //Obtener respuesta
+                      respComanda = data;
+                    });
+                });
+            });
+        }
+      });
+  }
+
+  /*isReservaCancelable(idMesa: any) {
+    this.gService
+    .get('comanda/last', idMesa)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data: any) => {
+    if (data.usuario.id === this.usuario.id) {
+this.isCancelable = true;
+    } else {
+      this.isCancelable = false;
+    }
+    });
+  }*/
+
 }

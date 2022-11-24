@@ -79,7 +79,7 @@ export const usuarios = [
         apellido1:"Dahmer",
         apellido2:"Ortiz",
         telefono:"8665565",
-        rol:rol.mesero,
+        rol:rol.cliente,
         idSede: 5,
        },
        //1

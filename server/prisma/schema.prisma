@@ -89,6 +89,7 @@ sede sede @relation(fields: [idSede],references: [id])
 }
 
 enum estadoComanda {
+  cancelada
   registrado //cliente aparta
   enProceso //está atendiendose
   pendiente //Cliente llego y no ha sido atendido

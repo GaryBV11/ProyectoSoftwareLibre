@@ -83,3 +83,7 @@ h4 {
   height: 30px;
   font-size: 30px;
 }
+
+button {
+  margin-right: 6px;
+}
