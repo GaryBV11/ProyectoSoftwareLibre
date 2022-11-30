@@ -34,6 +34,9 @@ export class ComandaDetalleComponent implements OnInit {
       this.datos=data;
   });
 
+
+   
+
   };
   close(){
     //Dentro de close ()

@@ -50,7 +50,7 @@
           <mat-icon>block</mat-icon>
         </button> 
       </ng-container>--> 
-        <button   *ngIf="mesa.estado != 'libre' && usuario.rol === 'administrador' ||  mesa.estado != 'libre' && usuario.rol === 'mesero'" mat-mini-fab color="accent" aria-label="Comanda"  title="Comanda"   (click)="reservarMesa(mesa.codigo, mesa.id)">
+        <button   *ngIf="mesa.estado != 'libre' && usuario.rol === 'administrador' ||  mesa.estado != 'libre' && usuario.rol === 'mesero'" mat-mini-fab color="accent" aria-label="Comanda"  title="Comanda"   (click)="verComanda(mesa.id)">
           <mat-icon>restaurant</mat-icon>
         </button> 
     </mat-card-actions>

@@ -7,6 +7,7 @@ import { DetalleMesaComponent } from '../detalle-mesa/detalle-mesa.component';
 import { MantenimientoComponent } from '../mantenimiento/mantenimiento.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogoConfirmacionComponent } from 'src/app/share/dialogo-confirmacion/dialogo-confirmacion.component';
+import { ComandaEnacabezadoComponent } from 'src/app/comanda/comanda-enacabezado/comanda-enacabezado.component';
 
 @Component({
   selector: 'app-gestion',
@@ -174,5 +175,15 @@ this.isCancelable = true;
     }
     });
   }*/
+  verComanda(idMesa: number) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.width = '90%';
+    dialogConfig.data = {
+      idMesa,
+    };
+    
+    this.dialog.open(ComandaEnacabezadoComponent, dialogConfig);
+  }
 
 }

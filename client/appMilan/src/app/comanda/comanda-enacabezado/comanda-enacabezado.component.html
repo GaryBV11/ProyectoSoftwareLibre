@@ -1,57 +1,82 @@
-<div class="grid-container">
-  <div id="contenedor-titulo">
-    <h1>Comandas </h1>
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+  <mat-icon class="close-icon" color="primary">close</mat-icon>
+</button>
+<div *ngIf="datos">
+<h2 mat-dialog-title id="titulo-detalle">Comanda</h2>
+
+<mat-dialog-content class="encabezado">
+<p *ngFor="let item of datos">Nombre de reserva: {{item.usuario.nombre}} {{item.usuario.apellido1}} {{item.usuario.apellido2}}</p>
+<p *ngFor="let item of datos">{{item.nota}}</p>
+<p *ngFor="let item of datos"> {{item.estado | comandaPipe}}</p>
+
+</mat-dialog-content>
+  <mat-dialog-content>
+    <div class="mat-elevation-z8"   
+    *ngIf="dataSource"
+    >
+      <table mat-table [dataSource]="dataSource"
+       class="full-width-table"  matSort
+       matSortStart="desc" aria-label="Elements">
+        <!-- Columna Cedula -->
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre del Producto</th>
+          <td mat-cell *matCellDef="let row">{{ row.producto.descripcion }}</td>
+        </ng-container>
+
+        <!-- Columna Nombre -->
+        <ng-container matColumnDef="categoria">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de producto</th>
+          <td mat-cell *matCellDef="let row">{{ row.producto.categoria | productoPipe}}</td>
+        </ng-container>
+        <!-- Columna Apellido1 -->
+        <ng-container matColumnDef="cantidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Cantidad</th>
+          <td mat-cell *matCellDef="let row">{{ row.cantidad }}</td>
+        </ng-container>
+         <!-- Columna Apellido1 -->
+         <ng-container matColumnDef="precio">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
+          <td mat-cell *matCellDef="let row">{{ row.producto.precio }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button
+              mat-mini-fab
+              matTooltip="Actualizar Usuario"
+              aria-label="Actualizar Usuario"
+              color="accent"
+            >
+              <mat-icon class="mat-18">edit</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+      </table>
+      
+      <mat-paginator
+      #paginator
+      [length]="dataSource?.data?.length"
+      [pageIndex]="0"
+      [pageSize]="5"
+      [pageSizeOptions]="[3, 5, 10]"
+      aria-label="Seleccione una pagina"
+    >
+    </mat-paginator>
+      
     </div>
-    <mat-grid-list [cols]="3" rowHeight="24em" gutterSize="12px" *ngIf="datos" style="text-align:center;">
-      <mat-grid-tile *ngFor="let item of datos" >
-        <mat-card class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              {{item.id}}
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <div>
-               {{
-                item.usuario.nombre
-            }} {{
-              item.usuario.apellido1
-          }} {{
-            item.usuario.apellido2
-        }}</div>
-          </mat-card-content>
-          <mat-card-content class="dashboard-card-content">
-            <div> {{
-              item.usuario.rol
-            }}</div>
-          </mat-card-content>
-          <mat-card-content class="dashboard-card-content">
-            <div>Sub Total: {{
-              item.subTotal
-            }}</div>
-          </mat-card-content>
-          <mat-card-content class="dashboard-card-content">
-            <div> Impuesto: {{
-              item.impuesto
-            }}</div>
-          </mat-card-content>
-          <mat-card-content class="dashboard-card-content">
-            <div> Total: {{
-              item.total
-            }}</div>
-          </mat-card-content>
-          <mat-card-content class="dashboard-card-content">
-            <div>{{
-              item.estado
-            }}</div>
-          </mat-card-content>
-          <mat-divider inset></mat-divider>
-           <mat-card-actions>
-            <button mat-mini-fab color="warn" aria-label="Detalle"  title="Detalle"   (click)="comandaDetalle(item.id)">
-              <mat-icon>add_circle</mat-icon>
-        </button> 
-          </mat-card-actions> 
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
+  </mat-dialog-content>
+
+<mat-dialog-content class="footerComanda">
+  <ul *ngFor="let item of datos">Sub Total: {{item.subTotal}}</ul>
+  <ul *ngFor="let item of datos">IV: {{item.impuesto}}</ul>
+  <ul *ngFor="let item of datos">Total: {{item.total}}</ul>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button  mat-flat-button color="warn" aria-label="Comanda"  title="Comanda" (click)="traerProductos(idComandaMesa)" >
+    Agregar Producto
+  </button> 
+</mat-dialog-actions>
+</div>

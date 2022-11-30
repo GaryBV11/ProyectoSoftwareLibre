@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap");
+
+.example-card {
+  max-width: 250px;
+  min-width: 250px;
+  background-color: #292a31;
+  margin-bottom: 10px;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
+}
+
+.mat-card-header {
+  justify-content: center;
+}
+
+.mat-card-title {
+  color: #ffffff;
+  font-family: "Cinzel", serif;
+}
+
+.mat-card-actions {
+  text-align: center;
+}
+
+.imagen-card {
+  height: 200px;
+}
+
+p {
+  text-align: center;
+  font-family: "Cinzel", serif;
+  color: #ffffff;
+}
+
+#contenedor-titulo {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h1 {
+  display: inline-block;
+  text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 30px;
+  color: #ce2b37;
+  border-bottom: 3px solid #009246;
+}
+
+h4 {
+  padding-top: 15px;
+  font-family: "Cinzel", serif;
+  font-size: 19px;
+  margin-right: 10px;
+}
+.contenedor-cards {
+  margin: 0 auto;
+  display: flex;
+  width: 90%;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#contenedor-form {
+  display: flex;
+  justify-content: center;
+}
+
+#contenedor-select-sedes {
+  display: flex;
+  margin-right: 20px;
+}
+
+#boton-agregar {
+  width: 55px;
+  height: 55px;
+}
+
+#boton-agregar .mat-icon {
+  width: 50px;
+  height: 30px;
+  font-size: 30px;
+}
+.productos{
+    display:flex;
+    flex-wrap: wrap;
+    margin-bottom:5px;
+    justify-content: space-evenly;
+    align-content: space-around;
+    
+    
+}

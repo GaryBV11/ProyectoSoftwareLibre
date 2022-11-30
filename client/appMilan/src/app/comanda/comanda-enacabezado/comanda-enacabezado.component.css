@@ -1,44 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+.full-width-table{
+  width: 100%;
+}
+.mat-card-title p {
 
-.mat-card-header {
-    justify-content: center;
-  }
-  .mat-card-title {
-    color: #FFFFFF ;
-    font-family: 'Cinzel', serif;
-  }
-  .mat-card-actions {
-    text-align: center;
-  }
-  h1 {
-    display: inline-block ;
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-size: 30px;
-    color: #ce2b37;
-    border-bottom: 3px solid #009246;
-   }
-   #contenedor-titulo {
-    margin-top: 30px;
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  .mat-grid-list {
-    margin: 0 auto;
-    display: flex;
-    width: 90%;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .dashboard-card{
-    background-color:#292a31;
-  }
+  display: inline;
+  font-family: "Cinzel", serif;
+  font-size: 35px;
+  color: #ce2b37;
+  border-bottom: 3px solid #009246;
+  margin-left: 10px;
+}
 
-  .dashboard-card-content{
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    color: #FFFFFF ;
-    font-size: medium;
-  }
+.mat-card-title button {
+  margin-left: 20px;
+}
+
+h2 {
+  display: inline-block ;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 25px;
+  color: #ce2b37;
+  border-bottom: 3px solid #009246;
+ }
+
+ .footerComanda{
+  text-align: center;
+ }

@@ -16,8 +16,9 @@ import { ComandaModule } from './comanda/comanda.module';
 
 
 
+
 @NgModule({
-  declarations: [AppComponent, ],
+  declarations: [AppComponent,],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

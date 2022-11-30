@@ -16,4 +16,6 @@ router.put("/:id",productoController.update);
 
 router.get("/sede/:id", productoController.getById);
 
+router.get("/sedes/:id", productoController.getBySede);
+
 module.exports = router;

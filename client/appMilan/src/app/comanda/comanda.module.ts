@@ -12,11 +12,18 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDialogModule} from "@angular/material/dialog";
 import { ReactiveFormsModule } from '@angular/forms';
 import { ComandaDetalleComponent } from './comanda-detalle/comanda-detalle.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { productoPipe } from 'src/app/pipes/pipes.module';
+import { comandaPipe } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   declarations: [
     ComandaEnacabezadoComponent,
-    ComandaDetalleComponent
+    ComandaDetalleComponent,
+    productoPipe,
+    comandaPipe,
   ],
   imports: [
     CommonModule,
@@ -29,7 +36,11 @@ import { ComandaDetalleComponent } from './comanda-detalle/comanda-detalle.compo
     MatDividerModule,
     MatSelectModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
+    
   ]
 })
 export class ComandaModule { }

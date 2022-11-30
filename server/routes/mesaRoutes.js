@@ -17,4 +17,5 @@ router.get("/:id", mesaController.getById);
 router.put("/:id",mesaController.update);
 
 router.get("/sede/:id", mesaController.getBySede);
+
 module.exports = router;

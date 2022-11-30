@@ -24,4 +24,5 @@ router.get("/pagos/:id", detallePagoController.getByComanda);
 
 router.get("/pago/:id", detallePagoController.getById);
 
+
 module.exports = router;

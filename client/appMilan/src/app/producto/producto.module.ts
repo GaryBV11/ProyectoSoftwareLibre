@@ -19,8 +19,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ProductoComponent } from './ventasProductos/producto/producto.component';
 @NgModule({
-  declarations: [ProductoIndexComponent, ProductoFormComponent],
+  declarations: [ProductoIndexComponent, ProductoFormComponent,ProductoComponent],
   imports: [
     CommonModule,
     ProductoRoutingModule,

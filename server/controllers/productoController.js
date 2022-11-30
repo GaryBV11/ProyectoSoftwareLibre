@@ -28,15 +28,12 @@ module.exports.getById = async (request, response, next) => {
 
 module.exports.getBySede = async (request, response, next) => {
   let id = parseInt(request.params.id);
-  const productos = await prisma.producto.findMany({
-    orderBy: {
-      id: "asc",
-    },
+  const mesas = await prisma.sede.findUnique({
     where: {
-      idSede: id,
-    }
+      id: id,
+    },include:{productos:true}
   });
-  response.json(productos);
+  response.json(mesas);
 };
 
 module.exports.create=async(request, response, next)=>{
@@ -93,3 +90,4 @@ module.exports.update = async (request, response, next) => {
   });
   response.json(newproducto);
 };
+

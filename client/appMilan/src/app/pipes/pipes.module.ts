@@ -33,3 +33,38 @@ export class rolPipe implements PipeTransform {
   }
 }
 
+
+@Pipe({
+  name: 'productoPipe'
+})
+export class productoPipe implements PipeTransform {
+
+  transform(value: string): any {
+    switch (value) {
+      case 'platoPrincipal': return 'Plato Principal';
+      case 'bebida': return 'Bebida';
+      case 'entrada': return 'Entrada';  
+     default:  null;
+    }
+  }
+}
+
+@Pipe({
+  name: 'comandaPipe'
+})
+export class comandaPipe implements PipeTransform {
+
+  transform(value: string): any {
+    switch (value) {
+      case ' cancelada': return 'Libre';
+      case ' registrado': return 'Registrado';
+      case 'enProceso': return 'En Proceso';
+      case 'pendiente': return 'Pendiente';   
+      case 'entregada': return 'Entregada'; 
+      case 'porPagar': return 'Por Pagar'; 
+     default:  null;
+    }
+  }
+}
+
+
