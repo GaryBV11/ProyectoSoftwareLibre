@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/share/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor() { }
+  qtyItems:Number = 0;
+  constructor(private cartService: CartService,
+    /*private authService: AuthenticationService*/) { }
 
   ngOnInit(): void {
+        //Suscribirse al observable que gestiona la cantidad de items del carrito
+        this.cartService.countItems.subscribe((value)=>{
+          this.qtyItems=value;
+  });
   }
-
 }

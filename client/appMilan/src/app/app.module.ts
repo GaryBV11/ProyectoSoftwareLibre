@@ -12,13 +12,14 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { ShareModule } from './share/share.module';
 import { MesaModule } from './mesa/mesa.module';
 import { ComandaModule } from './comanda/comanda.module';
+import { OrdenModule } from './orden/orden.module';
 
 
 
 
 
 @NgModule({
-  declarations: [AppComponent,],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -34,6 +35,7 @@ import { ComandaModule } from './comanda/comanda.module';
     AppRoutingModule,
     MesaModule,
    ComandaModule,
+   OrdenModule
 
   ],
   providers: [],

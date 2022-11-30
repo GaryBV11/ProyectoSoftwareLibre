@@ -113,7 +113,7 @@ detallesComanda detalleComanda[]
 detallesPago detallePago[]
 }
 
-model detallePago {
+model detallePago { //ojo llave simple pasar a compuesta
 id Int @id @default(autoincrement())
 tipoPago metodoPago
 monto Decimal

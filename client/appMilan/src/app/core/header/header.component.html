@@ -54,9 +54,10 @@
     ><img src="../../../assets/IMG/Logo.png" alt="Logo" title="Logo" id="logo"
   /></span>
   <span class="spacer"></span>
-  <span>
-   garybarahona85@gmail.com
-</span>
+  <button mat-icon-button matBadgeColor="accent" [matBadge]="qtyItems.toString()" 
+[routerLink]="'/orden'" [routerLinkActive]="'mat-raised-button'"  aria-label="Cantidad">
+<mat-icon>shopping_cart</mat-icon>
+</button>   
 <span></span>
 <button mat-icon-button [matMenuTriggerFor]="usuario">
   <mat-icon>person</mat-icon>
@@ -76,4 +77,8 @@
   </button>
   
   </mat-menu>
+  <span>
+    garybarahona85@gmail.com
+ </span>
 </mat-toolbar>
+
