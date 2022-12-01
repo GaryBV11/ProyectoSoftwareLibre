@@ -24,7 +24,9 @@ export class ComandaEnacabezadoComponent implements OnInit {
   public idComandaMesa:number=0;
   comandaForm: FormGroup;
   isCreate:boolean=true;
-  
+  subtotal:number=0;
+  iv:number=0;
+  Total:number=0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -38,6 +40,7 @@ export class ComandaEnacabezadoComponent implements OnInit {
     private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ComandaEnacabezadoComponent>,
+    private route: ActivatedRoute,
   ) {
     this.idComandaMesa=data.idMesa;
     
@@ -45,6 +48,7 @@ export class ComandaEnacabezadoComponent implements OnInit {
   ngOnInit(): void {
     this.listaComandas(this.idComandaMesa);
     console.log(this.data)
+    this.subtotal=0;
   }
 
 
@@ -69,21 +73,35 @@ export class ComandaEnacabezadoComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
       console.log(this.detallesList);
-
+      this.calcularTotales();
   });
 }
   
 
 traerProductos(idComandaMesa:number){
-  const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = false;
-    dialogConfig.width = '90%';
-    dialogConfig.data = {
-      idComandaMesa,
-    };
-    this.dialog.open(ProductoComponent, dialogConfig);
+  this.router.navigate(['/productos/ventas', idComandaMesa], {
+    relativeTo: this.route,
+  });
+  this.dialogRef.close();
 }
   
+ calcularTotales(){ 
+  for(let i=0;i<this.detallesList.length;i++){
+    this.subtotal=this.subtotal+parseFloat(this.detallesList[i].producto.precio)*parseInt((this.detallesList[i].cantidad));
+    this.iv=this.subtotal*0.13;
+    this.Total=this.subtotal+this.iv;
+  }
  
+ }
+ borrarDetalle(idComanda:any,idProducto:any){
+  let detalle={idComanda,idProducto}
+  this.gService
+    .create('comanda/detalles/delete',detalle)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe((data:any)=>{
+      this.ngOnInit();
+      
+  });
+ }
 
 }

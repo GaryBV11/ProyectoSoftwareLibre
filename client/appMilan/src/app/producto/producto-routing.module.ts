@@ -8,6 +8,7 @@ const routes: Routes = [
     {path:'producto', component: ProductoIndexComponent},
     {path:'producto/create', component: ProductoFormComponent},
     {path:'productos/ventas', component: ProductoComponent},
+    {path:'productos/ventas/:id', component: ProductoComponent},
     {path:'producto/update/:id', component: ProductoFormComponent},
    
 

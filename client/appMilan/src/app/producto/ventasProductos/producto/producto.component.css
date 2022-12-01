@@ -93,3 +93,11 @@ h4 {
     
     
 }
+.boton{
+  display:flex;
+  flex-wrap: wrap;
+  margin-bottom:5px;
+  justify-content: space-evenly;
+  align-content: space-around;
+  margin-bottom: 2em;
+}

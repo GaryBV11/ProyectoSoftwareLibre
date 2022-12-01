@@ -24,5 +24,8 @@ router.get("/pagos/:id", detallePagoController.getByComanda);
 
 router.get("/pago/:id", detallePagoController.getById);
 
+router.post("/detalles/create",detalleComandaController.create);
+
+router.post("/detalles/delete",detalleComandaController.delete);
 
 module.exports = router;

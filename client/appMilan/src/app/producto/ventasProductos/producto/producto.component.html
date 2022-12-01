@@ -1,9 +1,9 @@
 <div id="contenedor-titulo">
-    <h1>Gestión de mesas </h1>
+    <h1>Productos Disponibles </h1>
 </div>
 <div id="contenedor-form">
     <form [formGroup]="sedesForm">
-      <div id="contenedor-select-sedes">
+      <div id="contenedor-select-sedes" *ngIf="visible">
         <h4>Sede:</h4>
     <mat-form-field appearance="fill" color="accent">
         <mat-label>Sede</mat-label>
@@ -30,9 +30,16 @@
     <p>Categoria: {{producto.categoria}}</p>
   </mat-card-content>
   <mat-card-actions class="mat-card-actions">
-    <button mat-flat-button color="accent" aria-label="Detalles"  title="Ver más detalles" >
+    <button mat-flat-button color="accent" aria-label="Detalles"  title="Ver más detalles" (click)=" detalleDeComanda(producto.id)" >
       Ordenar
     </button>
   </mat-card-actions>
 </mat-card>
 </div>
+<mat-dialog-actions class="boton" *ngIf="!visible" >
+  <button  mat-flat-button color="warn" aria-label="Comanda"  title="Comanda" (click)="volverAMesas()"  >
+   Volver a la comanda
+  </button> 
+</mat-dialog-actions>
+
+
