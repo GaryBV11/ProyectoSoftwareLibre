@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ComandaEnacabezadoComponent } from 'src/app/comanda/comanda-enacabezado/comanda-enacabezado.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { CartService } from 'src/app/share/cart.service';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -29,7 +30,8 @@ export class ProductoComponent implements OnInit {
     private router: Router,
     private dialog: MatDialog,
     private route: ActivatedRoute,
-    private activeRouter: ActivatedRoute) { 
+    private activeRouter: ActivatedRoute,
+    private cartService: CartService,) { 
       this. formularioReactice();
       this.obtenerSedes();
      
@@ -47,9 +49,7 @@ export class ProductoComponent implements OnInit {
     
      this.encontrarComnanda(this.idMesa);
     }
-  if(this.idMesa==0){
-    //LOGICA DE GARY DEL INITIT
-  }
+
     
 
     }
@@ -112,6 +112,25 @@ export class ProductoComponent implements OnInit {
   }
   
   detalleDeComanda(idProducto:any){
+
+    if(this.idMesa==0){
+      //LOGICA DE GARY DEL INITIT
+     
+        this.gService
+        .get('producto',idProducto)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data:any)=>{
+          //Agregar videojuego obtenido del API al carrito
+          this.cartService.addToCart(data);
+          //Notificar al usuario
+          /*this.notificacion.mensaje(
+            'Orden',
+            'Videojuego: '+data.nombre+' agregado a la orden',
+            TipoMessage.success
+          );*/
+        });
+      
+    } else {
     this.gService
     .get('comanda/detalles',this.comanda)
     .pipe(takeUntil(this.destroy$))
@@ -122,6 +141,7 @@ export class ProductoComponent implements OnInit {
    if(!this.productoEncontrado){}
    this.CrearDetalle(this.comanda,idProducto);
    this.idMesa=0
+  }
   }
 
 

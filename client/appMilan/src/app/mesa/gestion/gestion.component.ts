@@ -8,7 +8,7 @@ import { MantenimientoComponent } from '../mantenimiento/mantenimiento.component
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogoConfirmacionComponent } from 'src/app/share/dialogo-confirmacion/dialogo-confirmacion.component';
 import { ComandaEnacabezadoComponent } from 'src/app/comanda/comanda-enacabezado/comanda-enacabezado.component';
-
+import { AuthenticationService } from 'src/app/share/authentication.service';
 @Component({
   selector: 'app-gestion',
   templateUrl: './gestion.component.html',
@@ -23,12 +23,15 @@ export class GestionComponent implements OnInit {
   //isCancelable: boolean = true;
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  currentUser: any;
+  isAutenticated: boolean;
   constructor(
     private fb: FormBuilder,
     private gService: GenericService,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private authService: AuthenticationService,
   ) {
     this.obtenerUsuario();
     this.formularioReactice();
@@ -37,6 +40,14 @@ export class GestionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    //Subscripción al booleano que indica si esta autenticado
+    this.authService.isAuthenticated.subscribe(
+      (valor) => (this.isAutenticated = valor)
+    );
+
     this.sedesForm;
   
   }

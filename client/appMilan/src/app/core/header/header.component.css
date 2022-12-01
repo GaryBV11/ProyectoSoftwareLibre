@@ -5,3 +5,11 @@
  #logo {
     width: 140px;
  }
+  
+ .mat-toolbar {
+   padding: 0;
+ }
+
+#emailUser {
+   margin-right: 10px;
+ }

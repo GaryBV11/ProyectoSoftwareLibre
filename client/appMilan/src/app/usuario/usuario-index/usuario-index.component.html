@@ -34,6 +34,11 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido2</th>
             <td mat-cell *matCellDef="let row">{{ row.apellido2 }}</td>
           </ng-container>
+          <!-- Columna email -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let row">{{ row.email }}</td>
+          </ng-container>
            <!-- Columna Telefono -->
            <ng-container matColumnDef="telefono">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>

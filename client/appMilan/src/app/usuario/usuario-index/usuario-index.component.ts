@@ -21,7 +21,7 @@ export class UsuarioIndexComponent implements OnInit {
 
   dataSource= new MatTableDataSource<any>();  
   // Columnas
-  displayedColumns = ['id', 'nombre','apellido1','apellido2','telefono','sede','rol','acciones'];
+  displayedColumns = ['id', 'nombre','apellido1','apellido2','email','telefono','sede','rol','acciones'];
 
 
   constructor(private router: Router,

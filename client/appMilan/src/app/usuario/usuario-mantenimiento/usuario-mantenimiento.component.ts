@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthenticationService } from 'src/app/share/authentication.service';
 import { GenericService } from 'src/app/share/generic.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { GenericService } from 'src/app/share/generic.service';
   styleUrls: ['./usuario-mantenimiento.component.css']
 })
 export class UsuarioMantenimientoComponent implements OnInit {
+  hide=true;
   titleForm: string = 'Crear';
   destroy$: Subject<boolean> = new Subject<boolean>();
   sedesList: any;
@@ -21,12 +23,15 @@ export class UsuarioMantenimientoComponent implements OnInit {
  usuarioForm: FormGroup;
   idUsuario: number = 0;
   isCreate: boolean = true;
+  currentUser: any;
+  isAutenticated: boolean;
   constructor(
     private fb: FormBuilder,
     private gService: GenericService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<UsuarioMantenimientoComponent>
+    private dialogRef: MatDialogRef<UsuarioMantenimientoComponent>,
+    private authService: AuthenticationService,
   ) { 
     this.formularioReactive();
     this.obtenerRoles();
@@ -34,6 +39,14 @@ export class UsuarioMantenimientoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    //Subscripción al booleano que indica si esta autenticado
+    this.authService.isAuthenticated.subscribe(
+      (valor) => (this.isAutenticated = valor)
+    );
+
+    
       this.idUsuario = this.data.id;
       if (this.idUsuario != undefined) {
         this.isCreate = false;
@@ -50,6 +63,8 @@ export class UsuarioMantenimientoComponent implements OnInit {
               apellido1: this.usuarioInfo.apellido1,
               apellido2: this.usuarioInfo.apellido2,
               telefono: this.usuarioInfo.telefono,
+              email: this.usuarioInfo.email,
+              contrasena: this.usuarioInfo.contrasena,
               rol: this.usuarioInfo.rol,
               idSede: this.usuarioInfo.idSede,
             });
@@ -90,7 +105,9 @@ crearUsuario(): void {
     this.videojuegoForm.patchValue({ generos:gFormat});*/
   /* console.log(this.videojuegoForm.value);*/
   //Accion API create enviando toda la informacion del formulario
-  this.gService
+
+
+    this.gService
     .create('usuario', this.usuarioForm.value)
     .pipe(takeUntil(this.destroy$))
     .subscribe((data: any) => {
@@ -100,6 +117,8 @@ crearUsuario(): void {
         queryParams: {create:'true'}
       });*/
     });
+    
+  
 
   /*this.noti.mensaje('Mesa',
   'Mesa creada con éxito',
@@ -141,6 +160,7 @@ actualizarUsuario() {
   //Crear Formulario
   formularioReactive() {
    // [null, Validators.required]
+   if(this.isAutenticated == true) {
     this.usuarioForm = this.fb.group({
       id: [
         null,
@@ -166,21 +186,74 @@ actualizarUsuario() {
       Validators.required,
     ]),
   ],
+   email:  [null, Validators.compose([
+        Validators.pattern('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'),
+        Validators.required,
+      ]),
+    ],
+     contrasena: [
+        null,
+        Validators.required
+      ],
       telefono:  [null, Validators.compose([
         Validators.pattern('^[0-9]+$'),
         Validators.required,
       ]),
     ],
+
       rol: [null, Validators.required],
       idSede: [null, Validators.required],
    
     });
+  } else {
+    this.usuarioForm = this.fb.group({
+      id: [
+        null,
+        Validators.compose([
+          Validators.pattern('^[1-9]{1}0[0-9]{7}$'),
+          Validators.required,
+        ]),
+      ],
+      nombre: [
+        null,
+        Validators.compose([
+          Validators.pattern('^[a-zA-Z]+$'),
+          Validators.required,
+        ]),
+      ],
+      apellido1: [null, Validators.compose([
+        Validators.pattern('^[a-zA-Z]+$'),
+        Validators.required,
+      ]),
+    ],
+    apellido2: [null, Validators.compose([
+      Validators.pattern('^[a-zA-Z]+$'),
+      Validators.required,
+    ]),
+  ],
+   email:  [null, Validators.compose([
+        Validators.pattern('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'),
+        Validators.required,
+      ]),
+    ],
+     contrasena: [
+        null,
+        Validators.required
+      ],
+      telefono:  [null, Validators.compose([
+        Validators.pattern('^[0-9]+$'),
+        Validators.required,
+      ]),
+    ],
+   
+    });
+  }
   }
 
-  /*public errorHandling = (control: string, error: string) => {
+  public errorHandling = (control: string, error: string) => {
     return this.usuarioForm.controls[control].hasError(error);
   };
-*/
+
   onReset() {
     this.submitted = false;
     this.usuarioForm.reset();

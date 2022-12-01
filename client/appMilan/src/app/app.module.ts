@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { ShareModule } from './share/share.module';
 import { MesaModule } from './mesa/mesa.module';
 import { ComandaModule } from './comanda/comanda.module';
 import { OrdenModule } from './orden/orden.module';
+import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 
 
 
@@ -22,8 +23,9 @@ import { OrdenModule } from './orden/orden.module';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     HttpClientModule ,
+    BrowserAnimationsModule,
+   
     MatCardModule,
  
     CoreModule,
@@ -32,13 +34,14 @@ import { OrdenModule } from './orden/orden.module';
    
     ProductoModule,
     UsuarioModule,
-    AppRoutingModule,
+
     MesaModule,
    ComandaModule,
-   OrdenModule
-
+   OrdenModule,
+   AppRoutingModule,
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, 
+    useClass: HttpErrorInterceptorService, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

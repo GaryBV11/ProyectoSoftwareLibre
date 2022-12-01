@@ -1,7 +1,7 @@
 <button mat-icon-button class="close-button" [mat-dialog-close]="true">
     <mat-icon class="close-icon" color="primary">close</mat-icon>
   </button>
-  <form [formGroup]="usuarioForm" (ngSubmit)="isCreate ? crearUsuario(): actualizarUsuario()">
+  <form [formGroup]="usuarioForm" (ngSubmit)="isCreate ? crearUsuario(): actualizarUsuario()" novalidate>
     <mat-card class="shipping-card">
       <mat-card-header>
         <mat-card-title>{{ titleForm }} Usuario</mat-card-title>
@@ -63,7 +63,35 @@
             </div>
         </div>
 
-        
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput #id  placeholder="Email" formControlName="email">    
+          </mat-form-field>
+          <mat-error *ngIf="usuarioForm.controls['email'].hasError('required')">
+              Email es <strong>requerido</strong>
+          </mat-error>
+          <mat-error *ngIf="usuarioForm.controls['email'].hasError('pattern')">
+            Email no cumple el formato
+          </mat-error>
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'contrasena' : 'text'" placeholder="Contraseña usuario" formControlName="contrasena" />
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide contrasena'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+         <mat-error *ngIf="errorHandling('contrasena', 'required')">
+            Password es <strong>requerido</strong>
+          </mat-error>
+        </mat-form-field>
+        </div>
+      </div>
+
         <div class="row">
             <div class="col">
               <mat-form-field class="full-width">
@@ -79,7 +107,7 @@
         </div>
   
 
-        <div class="row">
+        <div class="row" *ngIf="isAutenticated && currentUser.user.rol === 'administrador'">
             <div class="col" *ngIf="sedesList">
                 <mat-form-field class="full-width">
                   <mat-select placeholder="Sede" formControlName="idSede">
@@ -91,7 +119,7 @@
               </div>
         </div>
 
-          <div class="row">
+          <div class="row" *ngIf="isAutenticated && currentUser.user.rol === 'administrador'">
               <div class="col" *ngIf="rolesList">
                   <mat-form-field class="full-width">
                     <mat-select placeholder="Rol" formControlName="rol">

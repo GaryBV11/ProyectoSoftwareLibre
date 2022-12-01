@@ -23,6 +23,8 @@ id String @id
 nombre String
 apellido1 String
 apellido2 String
+email String @unique
+contrasena String 
 telefono String
 deleted Boolean @default(false)
 rol rol @default(cliente)

@@ -8,6 +8,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatMenuModule} from '@angular/material/menu'; 
 import {MatBadgeModule} from '@angular/material/badge';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {MatBadgeModule} from '@angular/material/badge';
   ],
   imports: [
     CommonModule,
+    ToastrModule.forRoot(), // ToastrModule added
     RouterModule,
     MatToolbarModule,
     MatIconModule,
