@@ -178,7 +178,7 @@ this.isCancelable = true;
   verComanda(idMesa: number) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
-    dialogConfig.width = '90%';
+    dialogConfig.width = '95%';
     dialogConfig.data = {
       idMesa,
     };
