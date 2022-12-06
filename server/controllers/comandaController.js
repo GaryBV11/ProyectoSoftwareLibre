@@ -11,7 +11,7 @@ module.exports.get = async (request, response, next) => {
       detallesComanda: {
         select: {
           idComanda: false,
-          producto: true,
+          comanda: true,
           cantidad: true,
         },
       },
@@ -31,14 +31,34 @@ module.exports.getById = async (request, response, next) => {
       detallesComanda: {
         select: {
           idComanda: false,
-          producto: true,
+          comanda: true,
           cantidad: true,
-          producto: true
+          comanda: true
         },
       },    
     },
   });
   response.json(comanda);
+};
+
+module.exports.getUltima = async (request, response, next) => {
+const comanda = await prisma.comanda.findMany({
+    orderBy: {
+      id: "desc",
+    },
+    take : 1,
+    include: {
+       detallesComanda: {
+         select: {
+           idComanda: false,
+           comanda: true,
+           cantidad: true,
+           comanda: true
+         },
+       },    
+     },
+   });
+   response.json(comanda);
 };
 
 module.exports.getUltimaByIdMesa = async (request, response, next) => {
@@ -56,9 +76,9 @@ module.exports.getUltimaByIdMesa = async (request, response, next) => {
       detallesComanda: {
         select: {
           idComanda: false,
-          producto: true,
+          comanda: true,
           cantidad: true,
-          producto: true
+          comanda: true
         },
       },    
     },
@@ -83,15 +103,17 @@ module.exports.create = async (request, response, next) => {
   response.json(newComanda);
 };
 
+
+/*
 //Actualizar un mesa
 module.exports.update = async (request, response, next) => {
   let mesa = request.body;
   let idMesa = parseInt(request.params.id);
-  /*//Obtener mesa vieja
-  const mesaVieja = await prisma.mesa.findUnique({
+  /*///*Obtener mesa vieja
+ /* const mesaVieja = await prisma.mesa.findUnique({
     where: { id: idMesa },
   });*/
-const newmesa = await prisma.mesa.update({
+/*const newmesa = await prisma.mesa.update({
   where: {
     id: idMesa,
   },
@@ -105,7 +127,28 @@ const newmesa = await prisma.mesa.update({
 response.json(newmesa);
 };
 
+*/
 
-
-
+//Actualizar comanda
+module.exports.update = async (request, response, next) => {
+  let comanda = request.body;
+  let idComanda = parseInt(request.params.id);
+ 
+  const newcomanda = await prisma.comanda.update({
+    where: {
+      id: idComanda
+    },
+    data: {
+      idUsuario: comanda.idUsuario,
+      estado:comanda.estado,
+      nota: comanda.nota,
+      subTotal:comanda.subTotal,
+      impuesto:comanda.impuesto,
+      totol:comanda.total,
+      idMesa: comanda.idMesa,
+      direccion: comanda.direccion
+    },
+  });
+  response.json(newcomanda);
+}
 

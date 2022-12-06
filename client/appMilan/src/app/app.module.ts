@@ -15,33 +15,30 @@ import { ComandaModule } from './comanda/comanda.module';
 import { OrdenModule } from './orden/orden.module';
 import { HttpErrorInterceptorService } from './share/http-error-interceptor.service';
 
-
-
-
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    HttpClientModule ,
+    HttpClientModule,
     BrowserAnimationsModule,
-   
     MatCardModule,
- 
     CoreModule,
     ShareModule,
     HomeModule,
-   
     ProductoModule,
     UsuarioModule,
-
     MesaModule,
-   ComandaModule,
-   OrdenModule,
-   AppRoutingModule,
+    ComandaModule,
+    OrdenModule,
+    AppRoutingModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, 
-    useClass: HttpErrorInterceptorService, multi: true },],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

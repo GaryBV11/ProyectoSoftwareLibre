@@ -159,7 +159,7 @@ export class GestionComponent implements OnInit {
 
                   newComanda = {
                     idMesa: id,
-                    idUsuario: this.usuario.id,
+                    idUsuario: this.currentUser.user.id,
                   };
                   this.gService //Crear comanda
                     .create('comanda', newComanda)

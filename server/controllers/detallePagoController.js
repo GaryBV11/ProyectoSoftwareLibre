@@ -21,3 +21,16 @@ module.exports.getById = async (request, response, next) => {
     });
     response.json(detallepago);
   };
+
+  //Crear un mesa
+module.exports.create = async (request, response, next) => {
+  let pago = request.body;
+  const newPago = await prisma.detallePago.create({
+    data: {
+      tipoPago: pago.tipoPago,
+      monto: pago.monto,
+      idComanda: pago.idComanda
+    },
+  });
+  response.json(newPago);
+};

@@ -3,7 +3,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/share/cart.service';
 import { GenericService } from 'src/app/share/generic.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
+import { OrdenPagoComponent } from '../orden-pago/orden-pago.component';
 
 @Component({
   selector: 'app-orden-index',
@@ -21,7 +23,8 @@ export class OrdenIndexComponent implements OnInit {
     private cartService: CartService,
     //private noti: NotificacionService,
     private gService: GenericService,
-    private router: Router
+    private router: Router,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -78,5 +81,15 @@ export class OrdenIndexComponent implements OnInit {
      TipoMessage.warning);*/
     
    }
+}
+
+pagar() {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.width = '40%';
+  dialogConfig.data = {
+    total : this.cartService.getTotal()
+  };
+  this.dialog.open(OrdenPagoComponent, dialogConfig);
 }
 }
