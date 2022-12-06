@@ -144,7 +144,7 @@ module.exports.update = async (request, response, next) => {
       nota: comanda.nota,
       subTotal:comanda.subTotal,
       impuesto:comanda.impuesto,
-      totol:comanda.total,
+      total:comanda.total,
       idMesa: comanda.idMesa,
       direccion: comanda.direccion
     },

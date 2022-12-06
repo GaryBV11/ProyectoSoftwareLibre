@@ -10,6 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ProductoComponent } from 'src/app/producto/ventasProductos/producto/producto.component';
 import { ComandaNotaComponent } from '../comanda-nota/comanda-nota.component';
+import { OrdenPagoComponent } from 'src/app/orden/orden-pago/orden-pago.component';
 @Component({
   selector: 'app-comanda-enacabezado',
   templateUrl: './comanda-enacabezado.component.html',
@@ -116,4 +117,19 @@ traerProductos(idComandaMesa:number){
   this.dialog.open(ComandaNotaComponent, dialogConfig);
   this.dialogRef.close();
 }
+ pagar(idcomanda: number){
+
+
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.width = '40%';
+  dialogConfig.data = {
+    total : this.subtotal,
+    idComanda:idcomanda,
+  };
+  this.dialog.open(OrdenPagoComponent, dialogConfig);
+
+ }
+
+
 }

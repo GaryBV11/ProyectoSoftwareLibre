@@ -217,7 +217,7 @@ export class OrdenPagoComponent implements OnInit {
     } else {
       //comanda en sede
       this.gService // Obtener comanda
-        .get('comanda/', this.datosDialog.idComanda)
+        .get('comanda', this.datosDialog.idComanda)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: any) => {
           let newComanda = {
@@ -231,7 +231,7 @@ export class OrdenPagoComponent implements OnInit {
             direccion: data.direccion,
           };
           this.gService //actualizar comanda
-            .update('comanda/', newComanda)
+            .update('comanda', newComanda)
             .pipe(takeUntil(this.destroy$))
             .subscribe((data: any) => {
               if (data != null) {
@@ -241,13 +241,14 @@ export class OrdenPagoComponent implements OnInit {
                   .pipe(takeUntil(this.destroy$))
                   .subscribe((data: any) => {
                     let newMesa = { //crea mesa actualizada
+                      id:data.id,
                       codigo : data.codigo,
                       estado:'libre',
                       capacidad:data.capacidad,
                       idSede: data.idSede
                     };
                     this.gService //actualizar mesa
-                      .update('mesa/', newMesa)
+                      .update('mesa', newMesa)
                       .pipe(takeUntil(this.destroy$))
                       .subscribe((data: any) => {
                         if (data != null) {

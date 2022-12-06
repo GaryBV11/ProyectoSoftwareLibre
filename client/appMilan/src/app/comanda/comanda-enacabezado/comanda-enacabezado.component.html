@@ -87,9 +87,13 @@
   <ul >Total:¢{{Total}}</ul>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions *ngFor="let item of datos">
   <button  mat-flat-button color="warn" aria-label="Comanda"  title="Comanda" (click)="traerProductos(idComandaMesa)" >
     Agregar Producto
   </button> 
+  <button mat-flat-button color="accent" (click)="pagar(item.id)" >
+    Comprar
+    <mat-icon>shopping_bag</mat-icon> 
+    </button>
 </mat-dialog-actions>
 </div>
