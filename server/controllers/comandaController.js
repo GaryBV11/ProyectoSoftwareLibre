@@ -152,3 +152,18 @@ module.exports.update = async (request, response, next) => {
   response.json(newcomanda);
 }
 
+
+module.exports.notaComanda = async (request, response, next) => {
+  let notas = request.body;
+  const comanda = await prisma.comanda.update({
+    where: {
+      id: notas.id,
+    },
+    data:{
+       nota: notas.nota
+    },
+  });
+  response.json(comanda);
+};
+
+

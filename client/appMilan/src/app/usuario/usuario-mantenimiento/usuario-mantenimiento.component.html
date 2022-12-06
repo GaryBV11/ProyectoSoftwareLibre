@@ -111,7 +111,8 @@
             <div class="col" *ngIf="sedesList">
                 <mat-form-field class="full-width">
                   <mat-select placeholder="Sede" formControlName="idSede">
-                    <mat-option *ngFor="let s of sedesList" [value]="s.id">
+                    <mat-option *ngFor="let s of sedesList" [value]="s.id"
+                    [disabled]="(s===null)? true:false">
                       {{ s.nombre }}
                     </mat-option>
                   </mat-select>            

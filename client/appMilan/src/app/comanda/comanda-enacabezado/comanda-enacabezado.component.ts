@@ -9,6 +9,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { ProductoComponent } from 'src/app/producto/ventasProductos/producto/producto.component';
+import { ComandaNotaComponent } from '../comanda-nota/comanda-nota.component';
 @Component({
   selector: 'app-comanda-enacabezado',
   templateUrl: './comanda-enacabezado.component.html',
@@ -104,4 +105,15 @@ traerProductos(idComandaMesa:number){
   });
  }
 
+ editarNota(idcomanda: number) {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = false;
+  dialogConfig.width = '95%';
+  dialogConfig.data = {
+    idcomanda,
+  };
+  
+  this.dialog.open(ComandaNotaComponent, dialogConfig);
+  this.dialogRef.close();
+}
 }

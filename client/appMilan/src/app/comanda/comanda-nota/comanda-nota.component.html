@@ -1,0 +1,30 @@
+<button mat-icon-button class="close-button" [mat-dialog-close]="true">
+    <mat-icon class="close-icon" color="primary">close</mat-icon>
+  </button>
+  <form [formGroup]="formulario" (ngSubmit)="agregarNota()" novalidate>
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title class="titulo">Nota del pedido</mat-card-title>
+      </mat-card-header>
+        <mat-card-content>
+            
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="full-width">
+                    <input matInput #nota  placeholder="Nota de comanda" formControlName="nota">    
+                </mat-form-field>
+                <mat-error *ngIf="formulario.controls['nota'].hasError('required')">
+                  La nota de la comanda es <strong>requerida</strong>
+                </mat-error>
+                <mat-error *ngIf="formulario.controls['nota'].hasError('pattern')">
+                  El formato de la nota no es valido
+                </mat-error>
+                </div>
+                </div>
+        
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-raised-button color="accent" type="submit">Guardar</button>
+        </mat-card-actions>
+    </mat-card>
+  </form>

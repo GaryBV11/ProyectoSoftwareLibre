@@ -10,6 +10,8 @@ router.get("/", usuarioController.get);
 
 router.get("/:id", usuarioController.getById);
 
+router.get("/correo/:id", usuarioController.getByCorreo);
+
 router.post("/",usuarioController.create);
 
 router.put("/:id",usuarioController.update);

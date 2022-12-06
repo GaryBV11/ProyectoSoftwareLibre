@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+
+.full-width {
+    width: 100%;
+    margin-top: 5%;
+  }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .col {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+ 
+
+  .titulo{
+    display: inline;
+    font-family: "Cinzel", serif;
+    font-size: 20px;
+    color: #ce2b37;
+    border-bottom: 3px solid #009246;
+    margin-left: 10px;
+    margin-bottom: 5%;
+  }

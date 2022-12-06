@@ -6,9 +6,20 @@
 
 <mat-dialog-content class="encabezado">
 <p *ngFor="let item of datos">Nombre de reserva: {{item.usuario.nombre}} {{item.usuario.apellido1}} {{item.usuario.apellido2}}</p>
-<p *ngFor="let item of datos">{{item.nota}}</p>
-<p *ngFor="let item of datos"> {{item.estado | comandaPipe}}</p>
-
+<p *ngFor="let item of datos"> Estado Actual: {{item.estado | comandaPipe}}</p>
+<mat-dialog-content style="width: 100%; display: inline-flex; text-align: left;" >
+  <p *ngFor="let item of datos">Observaciones del pedido: {{item.nota}}</p>
+  <button
+                style=" background-color:#F19D49; margin-left: 1%; height: 30px; "
+                mat-flat-button
+                matTooltip="Nota de Comanda"
+                aria-label="Nota de Comanda"
+                color="#F19D49"
+                (click)="editarNota(idComandaMesa)"
+              >
+              <p style="font-size: 14px; margin-bottom: 1%;">Editar Observación</p> 
+              </button>
+</mat-dialog-content>
 </mat-dialog-content>
   <mat-dialog-content>
     <div class="mat-elevation-z8"   
@@ -51,7 +62,7 @@
               color="#F19D49"
               (click)=" borrarDetalle(idComandaMesa,row.producto.id)"
             >
-              <mat-icon class="mat-18">delete</mat-icon>
+              <mat-icon class="mat-18">remove</mat-icon>
             </button>
           </td>
         </ng-container>

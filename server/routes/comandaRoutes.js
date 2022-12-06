@@ -18,6 +18,8 @@ router.get("/:id", comandaController.getById);
 
 router.put("/:id", comandaController.update);
 
+router.post("/nota", comandaController.notaComanda);
+
 router.get("/last/:id", comandaController.getUltimaByIdMesa);
 
 router.get("/detalles/:id", detalleComandaController.getByComanda);

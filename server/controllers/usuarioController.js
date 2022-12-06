@@ -25,6 +25,18 @@ module.exports.getById = async (request, response, next) => {
   });
   response.json(usuario);
 };
+//Buscar por correo
+module.exports.getByCorreo = async (request, response, next) => {
+  let id = request.params.id;
+  const usuario = await prisma.usuario.findUnique({
+    where: {
+      email: id,
+    },
+  });
+  response.json(usuario);
+};
+
+
 
 //Crear un usuario
 module.exports.create = async (request, response, next) => {
@@ -46,6 +58,7 @@ module.exports.create = async (request, response, next) => {
         telefono: usuario.telefono,
         deleted: false,
         rol: rol.cliente, 
+        idSede:1,
       },
     });
   } else {

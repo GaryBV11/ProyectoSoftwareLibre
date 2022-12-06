@@ -25,6 +25,7 @@ export class UsuarioMantenimientoComponent implements OnInit {
   isCreate: boolean = true;
   currentUser: any;
   isAutenticated: boolean;
+  
   constructor(
     private fb: FormBuilder,
     private gService: GenericService,
@@ -98,16 +99,15 @@ crearUsuario(): void {
   if (this.usuarioForm.invalid) {
     return;
   }
+  this.gService
+  .get('usuario/correo', this.usuarioForm.value.email)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((data: any) => {
 
-  //Obtener id Generos del Formulario y Crear arreglo con {id: value}
-  /*let gFormat:any=this.usuarioForm.get('generos').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario 
-    this.videojuegoForm.patchValue({ generos:gFormat});*/
-  /* console.log(this.videojuegoForm.value);*/
-  //Accion API create enviando toda la informacion del formulario
-
-
-    this.gService
+    if(data!=null){
+      console.log("Ya esta en uso este este correo")
+    }else{
+      this.gService
     .create('usuario', this.usuarioForm.value)
     .pipe(takeUntil(this.destroy$))
     .subscribe((data: any) => {
@@ -117,13 +117,19 @@ crearUsuario(): void {
         queryParams: {create:'true'}
       });*/
     });
-    
+  }
+  });
   
 
   /*this.noti.mensaje('Mesa',
   'Mesa creada con éxito',
   TipoMessage.success);*/
 }
+
+
+
+
+
 //Actualizar Videojuego
 actualizarUsuario() {
   //Establecer submit verdadero
@@ -163,84 +169,84 @@ actualizarUsuario() {
    if(this.isAutenticated == true) {
     this.usuarioForm = this.fb.group({
       id: [
-        null,
-        Validators.compose([
+        '',
+        Validators.compose([Validators.required,
           Validators.pattern('^[1-9]{1}0[0-9]{7}$'),
-          Validators.required,
+          
         ]),
       ],
       nombre: [
-        null,
+        '',
         Validators.compose([
           Validators.pattern('^[a-zA-Z]+$'),
           Validators.required,
         ]),
       ],
-      apellido1: [null, Validators.compose([
+      apellido1: ['', Validators.compose([
         Validators.pattern('^[a-zA-Z]+$'),
         Validators.required,
       ]),
     ],
-    apellido2: [null, Validators.compose([
+    apellido2: ['', Validators.compose([
       Validators.pattern('^[a-zA-Z]+$'),
       Validators.required,
     ]),
   ],
-   email:  [null, Validators.compose([
+   email:  ['', Validators.compose([
         Validators.pattern('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'),
         Validators.required,
       ]),
     ],
      contrasena: [
-        null,
+        '',
         Validators.required
       ],
-      telefono:  [null, Validators.compose([
+      telefono:  ['', Validators.compose([
         Validators.pattern('^[0-9]+$'),
         Validators.required,
       ]),
     ],
 
-      rol: [null, Validators.required],
-      idSede: [null, Validators.required],
+      rol: ['', Validators.required],
+      idSede: ['', Validators.required],
    
     });
   } else {
     this.usuarioForm = this.fb.group({
       id: [
-        null,
-        Validators.compose([
+        '',
+        Validators.compose([Validators.required,
           Validators.pattern('^[1-9]{1}0[0-9]{7}$'),
-          Validators.required,
+         
         ]),
       ],
       nombre: [
-        null,
+        '',
         Validators.compose([
           Validators.pattern('^[a-zA-Z]+$'),
           Validators.required,
         ]),
       ],
-      apellido1: [null, Validators.compose([
+      apellido1: ['', Validators.compose([
         Validators.pattern('^[a-zA-Z]+$'),
         Validators.required,
       ]),
     ],
-    apellido2: [null, Validators.compose([
+    apellido2: ['', Validators.compose([
       Validators.pattern('^[a-zA-Z]+$'),
       Validators.required,
     ]),
   ],
-   email:  [null, Validators.compose([
+   email:  ['', Validators.compose([
         Validators.pattern('[a-z0-9]+@[a-z]+\.[a-z]{2,3}'),
         Validators.required,
       ]),
     ],
      contrasena: [
-        null,
+        '',
         Validators.required
       ],
-      telefono:  [null, Validators.compose([
+      telefono:  ['', Validators.compose([
         Validators.pattern('^[0-9]+$'),
         Validators.required,
       ]),

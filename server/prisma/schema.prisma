@@ -105,6 +105,7 @@ idUsuario String
 estado estadoComanda
 direccion String?
 nota String?
+fecha  DateTime @default(now())
 subTotal Decimal
 impuesto Decimal
 total Decimal

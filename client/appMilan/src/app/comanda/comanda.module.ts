@@ -17,13 +17,16 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { productoPipe } from 'src/app/pipes/pipes.module';
 import { comandaPipe } from 'src/app/pipes/pipes.module';
-
+import { ComandaNotaComponent } from './comanda-nota/comanda-nota.component';
+import { MatInputModule } from '@angular/material/input';
 @NgModule({
   declarations: [
+    ComandaNotaComponent,
     ComandaEnacabezadoComponent,
     ComandaDetalleComponent,
     productoPipe,
     comandaPipe,
+    ComandaNotaComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +43,7 @@ import { comandaPipe } from 'src/app/pipes/pipes.module';
     MatFormFieldModule,
     MatTableModule,
     MatPaginatorModule,
-    
+    MatInputModule,
   ]
 })
 export class ComandaModule { }
