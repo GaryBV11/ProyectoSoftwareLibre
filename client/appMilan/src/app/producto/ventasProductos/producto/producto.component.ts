@@ -7,6 +7,7 @@ import { ComandaEnacabezadoComponent } from 'src/app/comanda/comanda-enacabezado
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { CartService } from 'src/app/share/cart.service';
+import { NotificacionService, TipoMessage } from 'src/app/share/notification.service';
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
@@ -29,6 +30,7 @@ export class ProductoComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private dialog: MatDialog,
+    private noti: NotificacionService,
     private route: ActivatedRoute,
     private activeRouter: ActivatedRoute,
     private cartService: CartService,) { 
@@ -64,7 +66,6 @@ export class ProductoComponent implements OnInit {
       .list('sede/')
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        console.log(data);
         this.sedesList = data;
       });
   }
@@ -74,7 +75,6 @@ export class ProductoComponent implements OnInit {
         .get('producto/sedes',idSede)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data:any) => {
-          console.log(data);
           this.productosList = data.productos;
         });
   }
@@ -123,11 +123,11 @@ export class ProductoComponent implements OnInit {
           //Agregar videojuego obtenido del API al carrito
           this.cartService.addToCart(data);
           //Notificar al usuario
-          /*this.notificacion.mensaje(
+          this.noti.mensaje(
             'Orden',
-            'Videojuego: '+data.nombre+' agregado a la orden',
+            'Producto agregado a la orden',
             TipoMessage.success
-          );*/
+          );
         });
       
     } else {
@@ -141,6 +141,11 @@ export class ProductoComponent implements OnInit {
    if(!this.productoEncontrado){}
    this.CrearDetalle(this.comanda,idProducto);
    this.idMesa=0
+   this.noti.mensaje(
+    'Orden',
+    'Producto agregado a la orden',
+    TipoMessage.success
+  );
   }
   }
 

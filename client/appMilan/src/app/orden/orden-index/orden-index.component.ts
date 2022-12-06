@@ -21,7 +21,7 @@ export class OrdenIndexComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   constructor(
     private cartService: CartService,
-    //private noti: NotificacionService,
+    private noti: NotificacionService,
     private gService: GenericService,
     private router: Router,
     private dialog: MatDialog,
@@ -84,6 +84,12 @@ export class OrdenIndexComponent implements OnInit {
 }
 
 pagar() {
+  if (this.cartService.getTotal() == 0) {
+    this.noti.mensaje('Error',
+    'No hay productos agregados al carrito',
+    TipoMessage.error);
+    return;
+  }
   const dialogConfig = new MatDialogConfig();
   dialogConfig.disableClose = true;
   dialogConfig.width = '40%';
