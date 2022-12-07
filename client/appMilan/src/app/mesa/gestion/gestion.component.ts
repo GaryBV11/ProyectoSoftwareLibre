@@ -18,7 +18,6 @@ export class GestionComponent implements OnInit {
   sedesForm: FormGroup;
   sedesList: any;
   mesasList: any;
-  usuario: any;
   datos: any;
   //isCancelable: boolean = true;
   destroy$: Subject<boolean> = new Subject<boolean>();
@@ -33,15 +32,12 @@ export class GestionComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthenticationService,
   ) {
-    this.obtenerUsuario();
+  
     this.formularioReactice();
     this.obtenerSedes();
-    console.log(this.usuario)
   }
 
   ngOnInit(): void {
-
-
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
     //Subscripción al booleano que indica si esta autenticado
     this.authService.isAuthenticated.subscribe(
@@ -49,7 +45,6 @@ export class GestionComponent implements OnInit {
     );
 
     this.sedesForm;
-  
   }
 
   onChange() {
@@ -63,21 +58,6 @@ export class GestionComponent implements OnInit {
     });
   }
 
-  obtenerUsuario() {
-    this.gService
-    .get('usuario', '2081000072') /*mesero*/
-      //.get('usuario', '208100007') /*admin */
-      //.get('usuario', '208109907') /*cliente */
-      //.get('usuario', '304570878') /*cliente */
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((data: any) => {
-        this.usuario = data;
- if (this.usuario.rol == 'mesero') { //Mesas para la sede a la que pertenece
-          this.obtenerMesasSede(this.usuario.idSede);
-             }
-      });
-
-  }
 
   obtenerSedes() {
     this.sedesList = null;
@@ -94,7 +74,7 @@ export class GestionComponent implements OnInit {
       .get('mesa/sede', id)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        if (this.usuario.rol != 'administrador') {
+        if (this.currentUser.user.rol != 'administrador') {
           this.mesasList = data.filter(mesa => mesa.estado != 'inactiva');
         } else {
           this.mesasList = data;
@@ -116,9 +96,12 @@ export class GestionComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.width = '70%';
-    const dialogRef = this.dialog.open(MantenimientoComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog output:', result);
+    this.dialog.open(MantenimientoComponent, dialogConfig).afterClosed()
+    .subscribe((confirmado: Boolean) => {
+      if (confirmado) {
+        this.ngOnInit();
+      }
+
     });
   }
 
@@ -129,7 +112,12 @@ export class GestionComponent implements OnInit {
     dialogConfig.data = {
       id,
     };
-    this.dialog.open(MantenimientoComponent, dialogConfig);
+    this.dialog.open(MantenimientoComponent, dialogConfig).afterClosed()
+    .subscribe((confirmado: Boolean) => {
+      if (confirmado) {
+        this.ngOnInit();
+      };
+    });
   }
 
   reservarMesa(codigo: number, id: number) {

@@ -1,4 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
+const { PrismaClient, Prisma } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
@@ -166,4 +166,29 @@ module.exports.notaComanda = async (request, response, next) => {
   response.json(comanda);
 };
 
+//Reporte ventasXFecha 
+//Hoy
+module.exports.reporteXFechas = async (request, response, next) => {
+  let result = null;
+  
+  let date = new Date();
+  result = await prisma.$queryRaw(
+    Prisma.sql`SELECT s.nombre as sede, SUM(c.total) as total FROM sede s INNER JOIN mesa m ON m.idSede=s.id INNER JOIN comanda c ON c.idMesa=m.id WHERE c.estado='entregada'AND YEAR(c.fecha)= ${date.getFullYear()} AND MONTH(c.fecha)= ${date.getMonth() + 1} AND DAY(c.fecha)= ${date.getDate() + 1} GROUP BY s.id`
+  )
+  response.json(result);
+  }
+  
+  //Con filtro
+  module.exports.reporteXFechasFiltro = async (request, response, next) => {
+    let values = request.body,
+    fechaInicial = new Date(values.fechaInicial), 
+    fechaFinal = new Date(values.fechaFinal);
+    let result = null;
+    
+    let date = new Date();
+    result = await prisma.$queryRaw(
+      Prisma.sql`SELECT s.nombre as sede, SUM(c.total) as total FROM sede s INNER JOIN mesa m ON m.idSede=s.id INNER JOIN comanda c ON c.idMesa=m.id WHERE c.estado='entregada'AND YEAR(c.fecha) BETWEEN ${fechaInicial.getFullYear()} AND ${fechaFinal.getFullYear()} AND MONTH(c.fecha)BETWEEN ${fechaInicial.getMonth() + 1} AND ${fechaFinal.getMonth() + 1}  AND DAY(c.fecha)BETWEEN ${fechaInicial.getDate() + 1} AND ${fechaFinal.getDate() + 1} GROUP BY s.id`
+    )
+    response.json(result);
+    }
 

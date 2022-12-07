@@ -4,29 +4,34 @@
   <mat-icon class="close-icon" color="primary">close</mat-icon>
 </button>
 <form [formGroup]="mesaForm" (ngSubmit)="isCreate ? crearMesa(): actualizarMesa()">
-  <input type="hidden" formControlName="id" />
-  <input  type="hidden" formControlName="codigo">    
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>{{ titleForm }} Mesa</mat-card-title>
     </mat-card-header>
       <mat-card-content>
 
-      
- 
-         
+        <input type="hidden" formControlName="id" />
+        
+          <div class="row" *ngIf="isCreate === true">
+            <div class="col">
+              <mat-form-field class="full-width">
+        <input  matInput #codigo  placeholder="Codigo" formControlName="codigo">    
+      </mat-form-field>
+            </div>
+        </div>
 
           <div class="row">
             <div class="col">
               <mat-form-field class="full-width">
                 <input matInput #capacidad  placeholder="Capacidad" formControlName="capacidad">    
-            </mat-form-field>
+           
             <mat-error *ngIf="mesaForm.controls['capacidad'].hasError('required')">
               Capacidad es <strong>requerido</strong>
             </mat-error>
             <mat-error *ngIf="mesaForm.controls['capacidad'].hasError('pattern')">
               Capacidad no cumple el formato
             </mat-error>
+          </mat-form-field>
             </div>
         </div>
          

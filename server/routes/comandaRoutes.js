@@ -34,4 +34,8 @@ router.post("/detalles/create",detalleComandaController.create);
 
 router.post("/detalles/delete",detalleComandaController.delete);
 
+router.get("/reporte/fechas", comandaController.reporteXFechas);
+
+router.post("/reporte/fechas", comandaController.reporteXFechasFiltro);
+
 module.exports = router;

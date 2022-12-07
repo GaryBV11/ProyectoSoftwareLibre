@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdenIndexComponent } from './orden-index/orden-index.component';
 import { OrdenPagoComponent } from './orden-pago/orden-pago.component';
+import { ReporteVentasXFechaComponent } from './reporte-ventas-xfecha/reporte-ventas-xfecha.component';
 
 const routes: Routes = [{ 
   path: 'orden',
@@ -16,7 +17,13 @@ const routes: Routes = [{
      component: OrdenPagoComponent,
     /*data:{
       roles:['ADMIN']
-    } */}];
+    } */},{
+    path: 'orden/reporteXFecha',
+    // canActivate:[AuthGuard],
+      component: ReporteVentasXFechaComponent,
+     /*data:{
+       roles:['ADMIN']
+     } */}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

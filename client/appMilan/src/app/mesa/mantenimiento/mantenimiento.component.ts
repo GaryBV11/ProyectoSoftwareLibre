@@ -31,8 +31,9 @@ export class MantenimientoComponent implements OnInit {
     private gService: GenericService,
     private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private dialogRef: MatDialogRef<MantenimientoComponent>
-  ) /*private noti: NotificacionService*/
+    private dialogRef: MatDialogRef<MantenimientoComponent>,
+    private noti: NotificacionService
+  ) 
   {
     this.formularioReactive();
     this.obtenerSedes();
@@ -57,7 +58,7 @@ export class MantenimientoComponent implements OnInit {
           this.mesaForm.setValue({
             id: this.mesaInfo.id,
             capacidad: this.mesaInfo.capacidad,
-            /* codigo: this.mesaInfo.codigo,*/
+            codigo: this.mesaInfo.codigo,
             idSede: this.mesaInfo.idSede,
             estado: this.mesaInfo.estado,
           });
@@ -77,10 +78,6 @@ export class MantenimientoComponent implements OnInit {
     }
 
     //Obtener id Generos del Formulario y Crear arreglo con {id: value}
-    /*let gFormat:any=this.mesaForm.get('generos').value.map(x=>({['id']: x }));
-      //Asignar valor al formulario 
-      this.videojuegoForm.patchValue({ generos:gFormat});*/
-    /* console.log(this.videojuegoForm.value);*/
     //Accion API create enviando toda la informacion del formulario
     this.gService
       .create('mesa', this.mesaForm.value)
@@ -88,14 +85,13 @@ export class MantenimientoComponent implements OnInit {
       .subscribe((data: any) => {
         //Obtener respuesta
         this.respMesa = data;
-        /*  this.router.navigate(['/mesas/gestion'],{
-          queryParams: {create:'true'}
-        });*/
+        if (this.respMesa != null) {
+          this.noti.mensaje('Mesa',
+          'Mesa creada con éxito',
+          TipoMessage.success);
+          this.dialogRef.close(true);
+        }
       });
-
-    /*this.noti.mensaje('Mesa',
-    'Mesa creada con éxito',
-    TipoMessage.success);*/
   }
   //Actualizar Videojuego
   actualizarMesa() {
@@ -106,11 +102,6 @@ export class MantenimientoComponent implements OnInit {
       return;
     }
 
-    //Obtener id Generos del Formulario y Crear arreglo con {id: value}
-    //let gFormat:any=this.videojuegoForm.get('generos').value.map(x=>({['id']: x }));
-    //Asignar valor al formulario
-    /* this.mesaForm.patchValue({ generos:gFormat});*/
-    console.log(this.mesaForm.value);
     //Accion API create enviando toda la informacion del formulario
     this.gService
       .update('mesa', this.mesaForm.value)
@@ -118,9 +109,12 @@ export class MantenimientoComponent implements OnInit {
       .subscribe((data: any) => {
         //Obtener respuesta
         this.respMesa = data;
-        /*this.router.navigate(['/mesas/gestion'],{
-          queryParams: {update:'true'}
-        });*/
+        if (this.respMesa != null) {
+          this.noti.mensaje('Mesa',
+          'Mesa actualizada con éxito',
+          TipoMessage.success);
+          this.dialogRef.close(true);
+        }
       });
   }
 
@@ -142,7 +136,7 @@ export class MantenimientoComponent implements OnInit {
     //[null, Validators.required]
     this.mesaForm = this.fb.group({
       id: [null, null],
-      /* codigo: [null, Validators.compose([Validators.required])],*/
+      codigo: [null, null],
       idSede: [null, Validators.required],
       capacidad: [
         null,
