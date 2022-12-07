@@ -170,7 +170,6 @@ module.exports.notaComanda = async (request, response, next) => {
 //Hoy
 module.exports.reporteXFechas = async (request, response, next) => {
   let result = null;
-  
   let date = new Date();
   result = await prisma.$queryRaw(
     Prisma.sql`SELECT s.nombre as sede, SUM(c.total) as total FROM sede s INNER JOIN mesa m ON m.idSede=s.id INNER JOIN comanda c ON c.idMesa=m.id WHERE c.estado='entregada'AND YEAR(c.fecha)= ${date.getFullYear()} AND MONTH(c.fecha)= ${date.getMonth() + 1} AND DAY(c.fecha)= ${date.getDate() + 1} GROUP BY s.id`
@@ -186,9 +185,41 @@ module.exports.reporteXFechas = async (request, response, next) => {
     let result = null;
     
     let date = new Date();
-    result = await prisma.$queryRaw(
-      Prisma.sql`SELECT s.nombre as sede, SUM(c.total) as total FROM sede s INNER JOIN mesa m ON m.idSede=s.id INNER JOIN comanda c ON c.idMesa=m.id WHERE c.estado='entregada'AND YEAR(c.fecha) BETWEEN ${fechaInicial.getFullYear()} AND ${fechaFinal.getFullYear()} AND MONTH(c.fecha)BETWEEN ${fechaInicial.getMonth() + 1} AND ${fechaFinal.getMonth() + 1}  AND DAY(c.fecha)BETWEEN ${fechaInicial.getDate() + 1} AND ${fechaFinal.getDate() + 1} GROUP BY s.id`
-    )
+    result = await prisma.$queryRaw(    
+      Prisma.sql`SELECT s.nombre as sede, SUM(c.total) as total FROM sede s INNER JOIN mesa m ON m.idSede=s.id INNER JOIN comanda c ON c.idMesa=m.id WHERE c.estado='entregada'AND c.fecha BETWEEN ${fechaInicial} AND ${fechaFinal} GROUP BY s.id`
+      )
     response.json(result);
     }
 
+
+
+
+
+
+
+
+//Reporte ventasXMetodo
+//Hoy
+module.exports.reporteMetodo = async (request, response, next) => {
+  let result = null;
+  let date = new Date();
+  result = await prisma.$queryRaw(
+    Prisma.sql`SELECT d.tipoPago, sum(d.monto) as cantidad FROM detallepago as d INNER JOIN comanda as c on d.idComanda = c.id WHERE YEAR(c.fecha)= ${date.getFullYear()} AND MONTH(c.fecha)= ${date.getMonth() + 1} AND DAY(c.fecha)= ${date.getDate()}  GROUP BY d.tipoPago`
+  )
+  console.log(result);
+  response.json(result);
+  }
+  
+  //Con filtro
+  module.exports.reporteMetodoFiltro = async (request, response, next) => {
+    let values = request.body,
+    fechaInicial = new Date(values.fechaInicial), 
+    fechaFinal = new Date(values.fechaFinal);
+    let result = null;
+    
+    let date = new Date();
+    result = await prisma.$queryRaw(
+      Prisma.sql`SELECT d.tipoPago, sum(d.monto) as cantidad FROM detallepago as d INNER JOIN comanda as c on d.idComanda = c.id WHERE c.fecha BETWEEN ${fechaInicial} AND ${fechaFinal} GROUP BY d.tipoPago`
+    )
+    response.json(result);
+    }

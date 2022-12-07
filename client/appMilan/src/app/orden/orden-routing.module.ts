@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OrdenIndexComponent } from './orden-index/orden-index.component';
 import { OrdenPagoComponent } from './orden-pago/orden-pago.component';
 import { ReporteVentasXFechaComponent } from './reporte-ventas-xfecha/reporte-ventas-xfecha.component';
+import { ReporteVentasXmetodoPagoComponent } from './reporte-ventas-xmetodo-pago/reporte-ventas-xmetodo-pago.component';
 
 const routes: Routes = [{ 
   path: 'orden',
@@ -18,12 +19,19 @@ const routes: Routes = [{
     /*data:{
       roles:['ADMIN']
     } */},{
-    path: 'orden/reporteXFecha',
+    path: 'orden/reporte/ventas/fecha',
     // canActivate:[AuthGuard],
       component: ReporteVentasXFechaComponent,
      /*data:{
        roles:['ADMIN']
-     } */}];
+     } */},
+     {
+      path: 'orden/reporte/ventas/metodo',
+      // canActivate:[AuthGuard],
+        component: ReporteVentasXmetodoPagoComponent,
+       /*data:{
+         roles:['ADMIN']
+       } */}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -35,6 +35,10 @@ export class ReporteVentasXFechaComponent implements OnInit {
   }
 
 reporteFiltrado(){
+  if (this.formulario.invalid) {
+    return;
+  }
+
   this.gService
       .create('comanda/reporte/fechas', this.formulario.value)
       .pipe(takeUntil(this.destroy$))

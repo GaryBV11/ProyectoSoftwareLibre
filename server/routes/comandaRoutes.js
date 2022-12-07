@@ -38,4 +38,8 @@ router.get("/reporte/fechas", comandaController.reporteXFechas);
 
 router.post("/reporte/fechas", comandaController.reporteXFechasFiltro);
 
+router.get("/reporte/metodo", comandaController.reporteMetodo);
+
+router.post("/reporte/metodo", comandaController.reporteMetodoFiltro);
+
 module.exports = router;

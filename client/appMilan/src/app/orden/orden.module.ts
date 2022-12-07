@@ -13,12 +13,14 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReporteVentasXFechaComponent } from './reporte-ventas-xfecha/reporte-ventas-xfecha.component';
+import { ReporteVentasXmetodoPagoComponent } from './reporte-ventas-xmetodo-pago/reporte-ventas-xmetodo-pago.component';
 
 
 @NgModule({
-  declarations: [OrdenIndexComponent,OrdenPagoComponent, ReporteVentasXFechaComponent],
+  declarations: [OrdenIndexComponent,OrdenPagoComponent, ReporteVentasXFechaComponent, ReporteVentasXmetodoPagoComponent],
   imports: [
     CommonModule,
     OrdenRoutingModule,
@@ -32,6 +34,7 @@ import { ReporteVentasXFechaComponent } from './reporte-ventas-xfecha/reporte-ve
     MatDialogModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
   ],
