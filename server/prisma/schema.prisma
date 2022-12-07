@@ -102,10 +102,10 @@ enum estadoComanda {
 model comanda {
 id Int @id @default(autoincrement())
 idUsuario String
-estado estadoComanda
+estado estadoComanda  
 direccion String?
 nota String?
-fecha  DateTime @default(now())
+fecha  DateTime @updatedAt
 subTotal Decimal
 impuesto Decimal
 total Decimal

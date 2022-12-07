@@ -1,6 +1,7 @@
 <mat-card class="shipping-card">
     
-  <form [formGroup]="formulario" (ngSubmit)="reporteFiltrado()" novalidate>  
+  <form [formGroup]="formulario" (ngSubmit)="reporteFiltrado()" novalidate> 
+    <div class="marcadores">
     <mat-form-field appearance="fill" >
         <mat-label>Fecha inicial</mat-label>
         <input matInput [matDatepicker]="picker1" formControlName="fechaInicial">
@@ -22,7 +23,8 @@
             Fecha final es <strong>requerido</strong>
        </mat-error>
       </mat-form-field>
-      <button mat-raised-button color="accent" type="submit">Procesar</button>
+    </div > 
+      <button class="Procesar" mat-flat-button color="accent" type="submit">Procesar</button>
     </form>
 
     <mat-card-content>
@@ -38,12 +40,12 @@
         <tbody>
           <tr *ngFor="let item of datos">
             <th>{{ item.sede }}</th>
-            <td>&dollar;{{ item.total }}</td>
+            <td>¢{{ item.total }}</td>
           </tr>
         </tbody>
         </table>
       </div>
-      <div class="col-md-4 text-right">
+      <div class="col-md-4 text-right" style="margin-top:15px;">
         <button mat-flat-button color="accent" (click)="openPDF()" >
             Descargar PDF
             <mat-icon>download</mat-icon> 

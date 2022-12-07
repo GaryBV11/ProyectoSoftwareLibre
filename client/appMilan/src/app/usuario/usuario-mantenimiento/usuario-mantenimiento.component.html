@@ -11,13 +11,14 @@
               <div class="col">
                 <mat-form-field class="full-width">
                   <input matInput #id  placeholder="Identificación" formControlName="id">    
-              </mat-form-field>
-              <mat-error *ngIf="usuarioForm.controls['id'].hasError('required')">
-                Idenfificación es <strong>requerido</strong>
-              </mat-error>
-              <mat-error *ngIf="usuarioForm.controls['id'].hasError('pattern')">
-                La idenfificación no es válida
-              </mat-error>
+                  <mat-error *ngIf="usuarioForm.controls['id'].hasError('required')">
+                    Idenfificación es <strong>requerido</strong>
+                  </mat-error>
+                  <mat-error *ngIf="usuarioForm.controls['id'].hasError('pattern')">
+                    La idenfificación no es válida
+                  </mat-error>
+                </mat-form-field>
+              
               </div>
           </div>
 
@@ -25,13 +26,14 @@
             <div class="col">
               <mat-form-field class="full-width">
                 <input matInput #id  placeholder="Nombre" formControlName="nombre">    
-            </mat-form-field>
-            <mat-error *ngIf="usuarioForm.controls['nombre'].hasError('required')">
-              Nombre es <strong>requerido</strong>
-            </mat-error>
-            <mat-error *ngIf="usuarioForm.controls['nombre'].hasError('pattern')">
-              Nombre no cumple el formato
-            </mat-error>
+                <mat-error *ngIf="usuarioForm.controls['nombre'].hasError('required')">
+                  Nombre es <strong>requerido</strong>
+                </mat-error>
+                <mat-error *ngIf="usuarioForm.controls['nombre'].hasError('pattern')">
+                  Nombre no cumple el formato
+                </mat-error>
+              </mat-form-field>
+            
             </div>
         </div>
 
@@ -39,13 +41,14 @@
             <div class="col">
               <mat-form-field class="full-width">
                 <input matInput #id  placeholder="Primer apellido" formControlName="apellido1">    
-            </mat-form-field>
-            <mat-error *ngIf="usuarioForm.controls['apellido1'].hasError('required')">
-                Primer apellido es <strong>requerido</strong>
-            </mat-error>
-            <mat-error *ngIf="usuarioForm.controls['apellido1'].hasError('pattern')">
-              Primer apellido no cumple el formato
-            </mat-error>
+                <mat-error *ngIf="usuarioForm.controls['apellido1'].hasError('required')">
+                  Primer apellido es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="usuarioForm.controls['apellido1'].hasError('pattern')">
+                Primer apellido no cumple el formato
+              </mat-error>
+              </mat-form-field>
+           
             </div>
         </div>
            
@@ -53,13 +56,15 @@
             <div class="col">
               <mat-form-field class="full-width">
                 <input matInput #id  placeholder="Segundo apellido" formControlName="apellido2">    
-            </mat-form-field>
-            <mat-error *ngIf="usuarioForm.controls['apellido2'].hasError('required')">
-                Segundo apellido es <strong>requerido</strong>
-            </mat-error>
-            <mat-error *ngIf="usuarioForm.controls['apellido2'].hasError('pattern')">
-              Segundo apellido no cumple el formato
-            </mat-error>
+                <mat-error *ngIf="usuarioForm.controls['apellido2'].hasError('required')">
+                  Segundo apellido es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="usuarioForm.controls['apellido2'].hasError('pattern')">
+                Segundo apellido no cumple el formato
+              </mat-error>
+            
+              </mat-form-field>
+           
             </div>
         </div>
 
@@ -67,13 +72,14 @@
           <div class="col">
             <mat-form-field class="full-width">
               <input matInput #id  placeholder="Email" formControlName="email">    
-          </mat-form-field>
-          <mat-error *ngIf="usuarioForm.controls['email'].hasError('required')">
-              Email es <strong>requerido</strong>
-          </mat-error>
-          <mat-error *ngIf="usuarioForm.controls['email'].hasError('pattern')">
-            Email no cumple el formato
-          </mat-error>
+              <mat-error *ngIf="usuarioForm.controls['email'].hasError('required')">
+                Email es <strong>requerido</strong>
+            </mat-error>
+            <mat-error *ngIf="usuarioForm.controls['email'].hasError('pattern')">
+              Email no cumple el formato
+            </mat-error>
+            </mat-form-field>
+          
           </div>
       </div>
 
@@ -96,13 +102,14 @@
             <div class="col">
               <mat-form-field class="full-width">
                 <input matInput #id  placeholder="Teléfono" formControlName="telefono">    
-            </mat-form-field>
-            <mat-error *ngIf="usuarioForm.controls['telefono'].hasError('required')">
-                Teléfono es <strong>requerido</strong>
-            </mat-error>
-            <mat-error *ngIf="usuarioForm.controls['telefono'].hasError('pattern')">
-                Teléfono no cumple el formato
-            </mat-error>
+                <mat-error *ngIf="usuarioForm.controls['telefono'].hasError('required')">
+                  Teléfono es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="usuarioForm.controls['telefono'].hasError('pattern')">
+                  Teléfono no cumple el formato
+              </mat-error>
+              </mat-form-field>
+           
             </div>
         </div>
   
