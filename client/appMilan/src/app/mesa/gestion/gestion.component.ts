@@ -100,9 +100,12 @@ export class GestionComponent implements OnInit {
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
         this.ngOnInit();
+        window.location.reload();
       }
 
     });
+    this.ngOnInit();
+    window.location.reload();
   }
 
   actualizarMesa(id: number) {
@@ -148,6 +151,10 @@ export class GestionComponent implements OnInit {
                   newComanda = {
                     idMesa: id,
                     idUsuario: this.currentUser.user.id,
+                    estado:"registrado",
+                    subTotal:0,
+                    impuesto:0,
+                    total:0
                   };
                   this.gService //Crear comanda
                     .create('comanda', newComanda)

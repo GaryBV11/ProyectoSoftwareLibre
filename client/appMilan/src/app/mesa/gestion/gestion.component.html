@@ -4,7 +4,7 @@
 </div>
 <div *ngIf="isAutenticated" id="contenedor-form">
 <form [formGroup]="sedesForm">
-  <div id="contenedor-select-sedes" *ngIf="currentUser.user.rol === 'administrador'">
+  <div id="contenedor-select-sedes" *ngIf="currentUser.user.rol === 'administrador'||currentUser.user.rol === 'cliente'">
     <h4>Sede:</h4>
 <mat-form-field appearance="fill" color="accent">
     <mat-label>Sede</mat-label>

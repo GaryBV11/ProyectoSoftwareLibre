@@ -27,6 +27,7 @@ export class OrdenPagoComponent implements OnInit {
   datosDialog: any;
   currentUser: any;
   isAutenticated: boolean;
+  detallesCarrito:any;
   destroy$: Subject<boolean> = new Subject<boolean>();
   constructor(
     public fb: FormBuilder,
@@ -49,6 +50,12 @@ export class OrdenPagoComponent implements OnInit {
     this.authService.isAuthenticated.subscribe(
       (valor) => (this.isAutenticated = valor)
     );
+
+    this.cartService.currentDataCart$.subscribe(data=>{
+      this.detallesCarrito=data;
+     })
+
+
   }
 
   calcularMontos() {
@@ -80,7 +87,7 @@ export class OrdenPagoComponent implements OnInit {
   //metodo calcular monto restante
   valuesChange() {
     //monto en efectivo
-    this.formulario
+    /* this.formulario
       .get('montoEfectivo')
       ?.valueChanges.subscribe((valor: string) => {
         if (this.tarjeta && this.efectivo) {
@@ -118,7 +125,7 @@ export class OrdenPagoComponent implements OnInit {
             this.formulario.controls['montoEfectivo'].setValue('0');
           }
         }
-      });
+      }); */
   }
 
   reactiveForm() {
@@ -207,7 +214,7 @@ export class OrdenPagoComponent implements OnInit {
       this.crearDetallesPago(this.datosDialog.idComanda);
     }
     if (this.datosDialog.idComanda == null) {
-      this.cartService.deleteCart();
+      
       this.notificacion.mensaje(
         'Pago',
         'Pago realizado con éxito',
@@ -224,9 +231,9 @@ export class OrdenPagoComponent implements OnInit {
             id: data.id,
             estado: 'entregada',
             nota: data.nota,
-            subTotal: this.subTotal,
-            impuesto: this.iva,
-            total: this.total,
+            subTotal: parseFloat(this.datosDialog.total),
+            impuesto: parseFloat(this.datosDialog.total) * 0.13,
+            total: parseFloat(this.subTotal) + parseFloat(this.iva),
             idMesa: data.idMesa,
             direccion: data.direccion,
           };
@@ -270,9 +277,10 @@ export class OrdenPagoComponent implements OnInit {
     //Crea una comanda que representa el carrito
     let newComanda = {
       idUsuario: this.currentUser.user.id,
-      subTotal: this.subTotal,
-      impuesto: this.iva,
-      total: this.total,
+      estado: 'entregada',
+      subTotal: parseFloat(this.datosDialog.total),
+      impuesto: parseFloat(this.datosDialog.total) * 0.13,
+      total: parseFloat(this.subTotal) + parseFloat(this.iva),
     };
     this.gService //Crear comanda
       .create('comanda', newComanda)
@@ -287,19 +295,25 @@ export class OrdenPagoComponent implements OnInit {
   crearDetallesComanda(comandaCreada) {
     //Crea los detalles de los productos del carrito
     let respDetalle;
-    this.cartService.getItems.forEach((item) => {
-      let newDetalle = {
-        cantidad: item.cantidad,
-        idProducto: item.idItem,
-        idComanda: comandaCreada.id,
-      };
-      //añadir detalles
-      this.gService
+    this.cartService.currentDataCart$.subscribe(data=>{
+      console.log(data)
+     data.forEach((item) => {
+        let newDetalle = {
+          cantidad: item.cantidad,
+          idProducto: item.idItem,
+          idComanda: comandaCreada.id,
+        
+        };
+        this.gService
         .create('comanda/detalles/create', newDetalle)
         .pipe(takeUntil(this.destroy$))
         .subscribe((data: any) => {
           respDetalle = data;
         });
+     });
+    
+      //añadir detalles
+      
     });
   }
 
@@ -333,6 +347,7 @@ export class OrdenPagoComponent implements OnInit {
           respMesa = data;
         });
     }
+    this.cartService.deleteCart();
   }
 
   close() {

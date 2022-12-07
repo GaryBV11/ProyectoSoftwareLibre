@@ -92,10 +92,10 @@ module.exports.create = async (request, response, next) => {
   const newComanda = await prisma.comanda.create({
     data: {
       idUsuario : comanda.idUsuario,
-      estado : 'registrado',
-      subTotal : 0,
-      impuesto: 0,
-      total: 0,
+      estado : comanda.estado,
+      subTotal : comanda.subTotal,
+      impuesto: comanda.impuesto,
+      total: comanda.total,
       idMesa: comanda.idMesa
 
     },
