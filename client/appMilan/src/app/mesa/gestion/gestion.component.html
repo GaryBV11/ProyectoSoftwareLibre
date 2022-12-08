@@ -42,7 +42,7 @@
         <button *ngIf="currentUser.user.rol === 'administrador'" mat-mini-fab color="accent" aria-label="Editar"  title="Editar"   (click)="actualizarMesa(mesa.id)">
           <mat-icon>edit</mat-icon>
         </button> 
-        <button  *ngIf="mesa.estado === 'libre' && currentUser.user.rol === 'cliente' || mesa.estado === 'libre' && currentUser.user.rol === 'administrador'" mat-mini-fab color="accent" aria-label="Reservar"  title="Reservar"   (click)="reservarMesa(mesa.codigo, mesa.id)">
+        <button  *ngIf="mesa.estado === 'libre'" mat-mini-fab color="accent" aria-label="Reservar"  title="Reservar"   (click)="reservarMesa(mesa.codigo, mesa.id)">
           <mat-icon>edit_note</mat-icon>
         </button> 
       <!--- <ng-container *ref="isReservaCancelable(mesa.id)"

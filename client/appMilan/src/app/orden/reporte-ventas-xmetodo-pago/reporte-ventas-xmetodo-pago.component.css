@@ -1,10 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+
+.titulo{
+    font-family: "Cinzel", serif;
+    color: #ce2b37;
+    border-bottom: 3px solid #009246;
+      font-weight: bold;
+}
+.marcadores{
+    margin: 0 auto;
+    margin-left: 50px;
+  }
 .chart{
     display: block;
     width: 400px;
     height: 400px;
     margin: 5px auto;
 }
-.shipping-card {
-    min-width: 120px;
-    margin: 20px auto;
+.shipping-card{
+    background-color: #f7f2f4;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
   }

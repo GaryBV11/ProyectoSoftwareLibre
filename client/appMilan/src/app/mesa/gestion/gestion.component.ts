@@ -39,11 +39,14 @@ export class GestionComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.currentUser.subscribe((x) => (this.currentUser = x));
+    if(this.currentUser.user.rol==='mesero'){
+      this.obtenerMesasSede(this.currentUser.user.idSede)
+    }
     //Subscripción al booleano que indica si esta autenticado
     this.authService.isAuthenticated.subscribe(
       (valor) => (this.isAutenticated = valor)
     );
-
+    console.log(this.currentUser.user.idSede)
     this.sedesForm;
   }
 
