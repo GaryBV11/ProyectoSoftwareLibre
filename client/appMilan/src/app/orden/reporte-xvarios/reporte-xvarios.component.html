@@ -1,28 +1,30 @@
 <mat-card class="shipping-card">
   
     <form [formGroup]="formulario" (ngSubmit)="reporteFiltrado()" novalidate> 
+      
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Filtro</mat-label>
+        <mat-select formControlName="filtro">
+          <mat-option value="mesa">
+            Mesa
+          </mat-option>
+  
+          <mat-option value="mesero">
+            Mesero
+          </mat-option>
+  
+          <mat-option value="producto">
+            Producto
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formulario.controls['filtro'].hasError('required')">
+          Metodo de pago es <strong>requerido</strong>
+        </mat-error>
+        </mat-form-field>
       <div class="marcadores">
         <input *ngIf="false"  formControlName="id">
          <input *ngIf="false" formControlName="rol">
-        <mat-form-field appearance="fill" class="full-width">
-          <mat-label>Filtro</mat-label>
-          <mat-select formControlName="filtro">
-            <mat-option value="mesa">
-              Mesa
-            </mat-option>
-    
-            <mat-option value="mesero">
-              Mesero
-            </mat-option>
-    
-            <mat-option value="producto">
-              Producto
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="formulario.controls['filtro'].hasError('required')">
-            Metodo de pago es <strong>requerido</strong>
-          </mat-error>
-          </mat-form-field>
+        
       <mat-form-field appearance="fill" >
           <mat-label>Fecha inicial</mat-label>
           <input matInput [matDatepicker]="picker1" formControlName="fechaInicial">

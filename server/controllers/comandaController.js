@@ -242,15 +242,19 @@ if (rolUsuario == rol.mesero) {
 if (filtro == 'mesa') {
   if (filtro == 'mesa') {
     result = await prisma.$queryRaw(
-      Prisma.sql`SELECT m.codigo as nombre, SUM(c.total) as total FROM comanda c inner join mesa m on c.idMesa = m.id inner join usuario u on c.idUsuario = u.id WHERE c.estado = 'entregada' and c.fecha BETWEEN ${fechaInicial} and ${fechaFinal} AND u.id = ${parseInt(usuario.id)}`
+      Prisma.sql`SELECT m.codigo as nombre, SUM(c.total) as total FROM comanda c inner join mesa m on c.idMesa = m.id inner join usuario u on c.idUsuario = u.id WHERE c.estado = 'entregada' and c.fecha BETWEEN ${fechaInicial} and ${fechaFinal} AND u.id = ${id}`
     )
   }
 }
 if (filtro == 'mesero') {
-
+  result = await prisma.$queryRaw(
+    Prisma.sql`SELECT u.nombre as nombre, SUM(c.total) as total FROM comanda c inner join usuario u on c.idUsuario = u.id WHERE c.estado = 'entregada' and c.fecha BETWEEN ${fechaInicial} and ${fechaFinal} AND u.id = ${id}`
+  )
 }
 if (filtro == 'producto') {
-
+  result = await prisma.$queryRaw(
+    Prisma.sql`SELECT p.descripcion as nombre, SUM(d.cantidad*p.precio) as total FROM producto p INNER JOIN detallecomanda d ON d.idProducto=p.id INNER JOIN comanda c on c.id=d.idComanda INNER JOIN usuario u on c.idUsuario=u.id WHERE c.estado='entregada'AND u.rol='mesero' AND c.fecha BETWEEN ${fechaInicial} and ${fechaFinal} AND u.id=${id} GROUP BY p.descripcion`
+  )
 }
 }
 if (rolUsuario == rol.administrador) {
@@ -261,10 +265,14 @@ if (rolUsuario == rol.administrador) {
     console.log(result);
   }
   if (filtro == 'mesero') {
-  
+    result = await prisma.$queryRaw(
+      Prisma.sql`SELECT u.nombre as nombre, SUM(c.total) as total FROM comanda c inner join usuario u on c.idUsuario = u.id WHERE c.estado = 'entregada' and c.fecha BETWEEN ${fechaInicial} and ${fechaFinal} GROUP BY u.nombre`
+    )
   }
   if (filtro == 'producto') {
-  
+    result = await prisma.$queryRaw(
+      Prisma.sql`SELECT p.descripcion as nombre, SUM(d.cantidad*p.precio) as total FROM producto p INNER JOIN detallecomanda d ON d.idProducto=p.id INNER JOIN comanda c on c.id=d.idComanda INNER JOIN usuario u on c.idUsuario=u.id WHERE c.estado='entregada'AND u.rol='mesero' AND c.fecha BETWEEN ${fechaInicial} and ${fechaFinal} GROUP BY p.descripcion`
+    )
   }
   }
  
