@@ -127,7 +127,12 @@ traerProductos(idComandaMesa:number){
     total : this.subtotal,
     idComanda:idcomanda,
   };
-  this.dialog.open(OrdenPagoComponent, dialogConfig);
+  this.dialog.open(OrdenPagoComponent, dialogConfig).afterClosed()
+  .subscribe((confirmado: Boolean) => {
+    if (confirmado) {
+    this.dialogRef.close(true);
+    }})
+  
 
  }
 

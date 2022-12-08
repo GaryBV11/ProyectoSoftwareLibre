@@ -9,6 +9,7 @@ import {
   NotificacionService,
   TipoMessage,
 } from 'src/app/share/notification.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-orden-pago',
@@ -36,7 +37,8 @@ export class OrdenPagoComponent implements OnInit {
     private notificacion: NotificacionService,
     private authService: AuthenticationService,
     private gService: GenericService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router,
   ) {
     this.datosDialog = data;
     this.calcularMontos();
@@ -341,6 +343,7 @@ if (this.tarjeta) {
                           );
                         }
                         this.dialogRef.close(true);
+                        this.router.navigate(['/']);
                       });
                   });
               }

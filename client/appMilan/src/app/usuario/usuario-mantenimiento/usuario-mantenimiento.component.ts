@@ -5,7 +5,10 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { AuthenticationService } from 'src/app/share/authentication.service';
 import { GenericService } from 'src/app/share/generic.service';
-
+import {
+  NotificacionService,
+  TipoMessage,
+} from 'src/app/share/notification.service';
 @Component({
   selector: 'app-usuario-mantenimiento',
   templateUrl: './usuario-mantenimiento.component.html',
@@ -30,6 +33,7 @@ export class UsuarioMantenimientoComponent implements OnInit {
     private fb: FormBuilder,
     private gService: GenericService,
     private router: Router,
+    private notificacion: NotificacionService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<UsuarioMantenimientoComponent>,
     private authService: AuthenticationService,
@@ -103,21 +107,39 @@ crearUsuario(): void {
   .get('usuario/correo', this.usuarioForm.value.email)
   .pipe(takeUntil(this.destroy$))
   .subscribe((data: any) => {
-
     if(data!=null){
-      console.log("Ya esta en uso este este correo")
+      this.notificacion.mensaje(
+        'Usuario',
+        'Este correo ya esta en Uso',
+        TipoMessage.error)
+     
     }else{
       this.gService
-    .create('usuario', this.usuarioForm.value)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data: any) => {
-      //Obtener respuesta
-      this.respUsuario = data;
-      /*  this.router.navigate(['/mesas/gestion'],{
-        queryParams: {create:'true'}
-      });*/
+  .get('usuario', this.usuarioForm.value.id)
+  .pipe(takeUntil(this.destroy$))
+  .subscribe((data: any) => {
+      if(data!=null){
+        this.notificacion.mensaje(
+          'Usuario',
+          'Esta cedula ya esta en uso',
+          TipoMessage.error)
+
+      }else{
+        this.gService
+        .create('usuario', this.usuarioForm.value)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((data: any) => {
+          //Obtener respuesta
+          this.respUsuario = data;
+          this.notificacion.mensaje(
+            'Usuario',
+            'Usuario creado con exito',
+            TipoMessage.success);
+            this.dialogRef.close();
+        });
+      }
     });
-  }
+  };
   });
   
 

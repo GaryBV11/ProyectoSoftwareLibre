@@ -131,16 +131,7 @@ export class ProductoComponent implements OnInit {
         });
       
     } else {
-    this.gService
-    .get('comanda/detalles',this.comanda)
-    .pipe(takeUntil(this.destroy$))
-    .subscribe((data:any)=>{
-      this.productoEncontrado=false; 
-   
-  });
-   if(!this.productoEncontrado){}
    this.CrearDetalle(this.comanda,idProducto);
-   this.idMesa=0
    this.noti.mensaje(
     'Orden',
     'Producto agregado a la orden',
@@ -149,17 +140,16 @@ export class ProductoComponent implements OnInit {
   }
   }
 
-
-
 CrearDetalle(idComanda:any,idProducto:any){
   let dataProducto={idComanda,idProducto,cantidad:1};
-  
+  console.log(idComanda+"id comanda")
   this.gService
     .create('comanda/detalles/create', dataProducto)
     .pipe(takeUntil(this.destroy$))
     .subscribe((data: any) => {
       
     });
+    this.ngOnInit();
 }
  
 volverAMesas(){

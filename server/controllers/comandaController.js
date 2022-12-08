@@ -93,6 +93,7 @@ module.exports.create = async (request, response, next) => {
     data: {
       idUsuario : comanda.idUsuario,
       estado : comanda.estado,
+      nota:comanda.nota,
       subTotal : comanda.subTotal,
       impuesto: comanda.impuesto,
       total: comanda.total,

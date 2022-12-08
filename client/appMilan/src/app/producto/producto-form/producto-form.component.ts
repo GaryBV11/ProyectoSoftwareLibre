@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { GenericService } from 'src/app/share/generic.service';
-
+import {
+  NotificacionService,
+  TipoMessage,
+} from 'src/app/share/notification.service';
 @Component({
   selector: 'app-producto-form',
   templateUrl: './producto-form.component.html',
@@ -14,13 +17,14 @@ export class ProductoFormComponent implements OnInit {
   destroy$: Subject<boolean> = new Subject<boolean>();
   sedesList:any;
   productoInfo:any;
-  respProducto:any;
+    respProducto:any;
   submitted = false;
   productoForm:FormGroup;
   idproducto: number = 0;
   isCreate:boolean=true;
   constructor(private fb: FormBuilder, private gService: GenericService,
-    private router: Router,private activeRouter: ActivatedRoute) { 
+    private router: Router,private activeRouter: ActivatedRoute,
+    private notificacion: NotificacionService,) { 
   this.formularioReactive();
   this.listaSedes();
     }
@@ -64,11 +68,17 @@ export class ProductoFormComponent implements OnInit {
       descripcion:[null,Validators.compose([
         Validators.required,Validators.minLength(2),Validators.maxLength(20)
       ])],
-      precio:[null, Validators.required],
-      ingredientes: [true, Validators.required],
+      precio: [
+        null,
+        Validators.compose([
+          Validators.pattern('^[1-9]{1}[0-9]*$'),
+          Validators.required,
+        ]),
+      ],
+      ingredientes: [null, Validators.required],
       categoria: [true, Validators.required],
       estado: [true, Validators.required],
-      imagenURL: [true, Validators.required],
+      imagenURL: [null, Validators.required],
 
       //Generos es un FormArray
       sedes:[null, Validators.required]
@@ -108,6 +118,13 @@ export class ProductoFormComponent implements OnInit {
     this.gService.create('producto',this.productoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
       this.respProducto=data;
+      if (data != null) {
+        this.notificacion.mensaje(
+          'Producto',
+          'Producto creado',
+          TipoMessage.success
+        );
+      }
       this.router.navigate(['/producto'],{
         queryParams: {create: 'true'}
       })
@@ -135,6 +152,13 @@ export class ProductoFormComponent implements OnInit {
     this.gService.update('producto',this.productoForm.value)
     .pipe(takeUntil(this.destroy$)) .subscribe((data: any) => {
       this.respProducto=data;
+      if (data != null) {
+        this.notificacion.mensaje(
+          'Producto',
+          'Producto actualizado',
+          TipoMessage.success
+        );
+      }
       this.router.navigate(['/producto'],{
         queryParams: {update: 'true'}
       })

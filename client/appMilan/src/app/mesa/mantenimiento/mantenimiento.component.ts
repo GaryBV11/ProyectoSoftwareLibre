@@ -168,7 +168,6 @@ export class MantenimientoComponent implements OnInit {
   }
 
   close() {
-    this.accion = "asdasd";
-    this.dialogRef.close({data :'Cancel'});
+   this.dialogRef.close();
   }
 }

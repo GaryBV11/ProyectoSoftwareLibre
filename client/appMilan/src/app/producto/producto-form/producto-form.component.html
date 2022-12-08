@@ -16,9 +16,12 @@
           </div>
           <div class="col">
             <mat-form-field class="full-width">
-              <input matInput placeholder="Precio" type="number" formControlName="precio">
+              <input matInput placeholder="Precio"  formControlName="precio">
               <mat-error *ngIf="productoForm.controls['precio'].hasError('required')">
                 Precio es <strong>requerido</strong>
+              </mat-error>
+              <mat-error *ngIf="productoForm.controls['precio'].hasError('pattern')">
+                Capacidad no cumple el formato
               </mat-error>
             </mat-form-field>
           </div>

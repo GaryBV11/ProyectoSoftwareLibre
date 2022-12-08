@@ -103,12 +103,11 @@ export class GestionComponent implements OnInit {
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
         this.ngOnInit();
-        window.location.reload();
+       
       }
 
     });
-    this.ngOnInit();
-    window.location.reload();
+    
   }
 
   actualizarMesa(id: number) {
@@ -121,6 +120,7 @@ export class GestionComponent implements OnInit {
     this.dialog.open(MantenimientoComponent, dialogConfig).afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
+        console.log('Gary pingon');
         this.ngOnInit();
       };
     });
@@ -154,7 +154,8 @@ export class GestionComponent implements OnInit {
                   newComanda = {
                     idMesa: id,
                     idUsuario: this.currentUser.user.id,
-                    estado:"registrado",
+                    estado:'porPagar',
+                    nota:'sin notas',
                     subTotal:0,
                     impuesto:0,
                     total:0
@@ -165,6 +166,9 @@ export class GestionComponent implements OnInit {
                     .subscribe((data: any) => {
                       //Obtener respuesta
                       respComanda = data;
+                       this.ngOnInit();
+
+
                     });
                 });
             });
@@ -192,7 +196,12 @@ this.isCancelable = true;
       idMesa,
     };
     
-    this.dialog.open(ComandaEnacabezadoComponent, dialogConfig);
+    this.dialog.open(ComandaEnacabezadoComponent, dialogConfig).afterClosed()
+    .subscribe((confirmado: Boolean) => {
+      if (confirmado) {
+        this.ngOnInit();
+      };
+    });
   }
 
 }

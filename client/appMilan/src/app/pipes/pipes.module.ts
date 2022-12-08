@@ -56,8 +56,8 @@ export class comandaPipe implements PipeTransform {
 
   transform(value: string): any {
     switch (value) {
-      case ' cancelada': return 'Libre';
-      case ' registrado': return 'Registrado';
+      case 'cancelada': return 'Libre';
+      case 'registrado': return 'Registrado';
       case 'enProceso': return 'En Proceso';
       case 'pendiente': return 'Pendiente';   
       case 'entregada': return 'Entregada'; 
