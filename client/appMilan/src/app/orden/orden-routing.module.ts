@@ -4,6 +4,7 @@ import { OrdenIndexComponent } from './orden-index/orden-index.component';
 import { OrdenPagoComponent } from './orden-pago/orden-pago.component';
 import { ReporteVentasXFechaComponent } from './reporte-ventas-xfecha/reporte-ventas-xfecha.component';
 import { ReporteVentasXmetodoPagoComponent } from './reporte-ventas-xmetodo-pago/reporte-ventas-xmetodo-pago.component';
+import { ReporteXvariosComponent } from './reporte-xvarios/reporte-xvarios.component';
 
 const routes: Routes = [{ 
   path: 'orden',
@@ -31,7 +32,14 @@ const routes: Routes = [{
         component: ReporteVentasXmetodoPagoComponent,
        /*data:{
          roles:['ADMIN']
-       } */}];
+       } */},
+       {
+        path: 'orden/reporte/ventas/varios',
+        // canActivate:[AuthGuard],
+          component: ReporteXvariosComponent,
+         /*data:{
+           roles:['ADMIN']
+         } */}];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

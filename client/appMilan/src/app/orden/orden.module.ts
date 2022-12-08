@@ -17,10 +17,11 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReporteVentasXFechaComponent } from './reporte-ventas-xfecha/reporte-ventas-xfecha.component';
 import { ReporteVentasXmetodoPagoComponent } from './reporte-ventas-xmetodo-pago/reporte-ventas-xmetodo-pago.component';
+import { ReporteXvariosComponent } from './reporte-xvarios/reporte-xvarios.component';
 
 
 @NgModule({
-  declarations: [OrdenIndexComponent,OrdenPagoComponent, ReporteVentasXFechaComponent, ReporteVentasXmetodoPagoComponent],
+  declarations: [OrdenIndexComponent,OrdenPagoComponent, ReporteVentasXFechaComponent, ReporteVentasXmetodoPagoComponent, ReporteXvariosComponent],
   imports: [
     CommonModule,
     OrdenRoutingModule,

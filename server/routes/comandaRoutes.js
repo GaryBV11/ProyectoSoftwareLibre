@@ -42,4 +42,6 @@ router.get("/reporte/metodo", comandaController.reporteMetodo);
 
 router.post("/reporte/metodo", comandaController.reporteMetodoFiltro);
 
+router.post("/reporte/varios", comandaController.reporteVarios);
+
 module.exports = router;

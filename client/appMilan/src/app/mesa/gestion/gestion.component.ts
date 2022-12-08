@@ -46,7 +46,7 @@ export class GestionComponent implements OnInit {
     this.authService.isAuthenticated.subscribe(
       (valor) => (this.isAutenticated = valor)
     );
-    console.log(this.currentUser.user.idSede)
+
     this.sedesForm;
   }
 
@@ -120,7 +120,6 @@ export class GestionComponent implements OnInit {
     this.dialog.open(MantenimientoComponent, dialogConfig).afterClosed()
     .subscribe((confirmado: Boolean) => {
       if (confirmado) {
-        console.log('Gary pingon');
         this.ngOnInit();
       };
     });

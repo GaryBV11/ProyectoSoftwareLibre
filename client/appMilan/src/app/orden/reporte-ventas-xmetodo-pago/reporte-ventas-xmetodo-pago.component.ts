@@ -33,6 +33,7 @@ export class ReporteVentasXmetodoPagoComponent implements AfterViewInit {
   }
   reactiveForm() {
     this.formulario = this.fb.group({
+      filtro: ['', [Validators.required]],
       fechaInicial: ['', [Validators.required]],
       fechaFinal: ['', [Validators.required]],
     });
