@@ -36,16 +36,16 @@ export class OrdenIndexComponent implements OnInit {
   actualizarCantidad(item: any) {
     this.cartService.addToCart(item);
     this.total=this.cartService.getTotal();
-   /* this.noti.mensaje('Orden',
+    this.noti.mensaje('Orden',
     'Cantidad actualizada',
-    TipoMessage.success);*/
+    TipoMessage.success);
   }
   eliminarItem(item: any) {
     this.cartService.removeFromCart(item);
     this.total=this.cartService.getTotal();
-    /*this.noti.mensaje('Orden',
+    this.noti.mensaje('Orden',
     'Producto eliminado',
-    TipoMessage.warning);*/
+    TipoMessage.warning);
   }
 
   registrarOrden() {
@@ -66,9 +66,9 @@ export class OrdenIndexComponent implements OnInit {
      this.gService
      .create('orden',infoOrden)
      .subscribe((respuesta:any)=>{
-       /*  this.noti.mensaje('Orden',
+       this.noti.mensaje('Orden',
          'Orden registrada',
-         TipoMessage.success);*/
+         TipoMessage.success);
          this.cartService.deleteCart();
          this.total=this.cartService.getTotal();
          console.log(respuesta);
@@ -76,9 +76,9 @@ export class OrdenIndexComponent implements OnInit {
      
  
     }else{
-    /*this.noti.mensaje('Orden',
+    this.noti.mensaje('Orden',
      'Agregue productos a la orden',
-     TipoMessage.warning);*/
+     TipoMessage.warning);
     
    }
 }
@@ -96,6 +96,12 @@ pagar() {
   dialogConfig.data = {
     total : this.cartService.getTotal()
   };
-  this.dialog.open(OrdenPagoComponent, dialogConfig);
+  this.dialog.open(OrdenPagoComponent, dialogConfig).afterClosed()
+  .subscribe((confirmado: Boolean) => {
+    if (confirmado) {
+      this.ngOnInit();
+    }
+
+  });;
 }
 }

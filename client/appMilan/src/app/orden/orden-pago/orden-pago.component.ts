@@ -87,7 +87,7 @@ export class OrdenPagoComponent implements OnInit {
   //metodo calcular monto restante
   valuesChange() {
     //monto en efectivo
-    /* this.formulario
+     this.formulario
       .get('montoEfectivo')
       ?.valueChanges.subscribe((valor: string) => {
         if (this.tarjeta && this.efectivo) {
@@ -125,50 +125,25 @@ export class OrdenPagoComponent implements OnInit {
             this.formulario.controls['montoEfectivo'].setValue('0');
           }
         }
-      }); */
-  }
+      }); 
+
+      }
 
   reactiveForm() {
-    /*https://angular.io/guide/reactive-forms
-   https://angular.io/api/forms/Validators */
-    if (this.efectivo && !this.tarjeta) {
       this.formulario = this.fb.group({
         montoEfectivo: [
           '',
-          [Validators.required, Validators.pattern('^[1-9]{1}[0-9]*$')],
-        ],
-      });
-    }
-
-    if (!this.efectivo && this.tarjeta) {
-      this.formulario = this.fb.group({
-        montoTarjeta: [
-          '',
-          [Validators.required, Validators.pattern('^[1-9]{1}[0-9]*$')],
-        ],
-        numero: [
-          '',
-          [Validators.required, Validators.pattern('^[1-9]{1}[0-9]{15}$')],
-        ],
-      });
-    }
-
-    if ((this.efectivo && this.tarjeta) || (!this.efectivo && !this.tarjeta)) {
-      this.formulario = this.fb.group({
-        montoEfectivo: [
-          '',
-          [Validators.required, Validators.pattern('^[1-9]{1}[0-9]*$')],
+          null
         ],
         montoTarjeta: [
           '',
-          [Validators.required, Validators.pattern('^[1-9]{1}[0-9]*$')],
+          null
         ],
         numero: [
           '',
-          [Validators.required, Validators.pattern('^[1-9]{1}[0-9]{15}$')],
+          null
         ],
       });
-    }
   }
 
   onReset() {
@@ -184,10 +159,109 @@ export class OrdenPagoComponent implements OnInit {
   };
 
   procesarPago() {
-    //si el form no es valido
-    if (this.formulario.invalid) {
+
+    //Validaciones xD
+//Metodo de pago no seleccionado
+    if (!this.efectivo && !this.tarjeta) {
+      this.notificacion.mensaje(
+        'Error',
+        'Por favor seleccione un metodo de pago',
+        TipoMessage.error
+      );
       return;
     }
+    
+    let regMonto = new RegExp('^[1-9]{1}[0-9]*$');
+    //validaciones en efectivo
+if (this.efectivo) {
+//monto vacio
+  if (this.formulario.controls['montoEfectivo'].value == '') {
+    this.notificacion.mensaje(
+      'Error',
+      'Por favor ingrese un monto en efectivo',
+      TipoMessage.error
+    );
+    return;
+  }
+//monto en 0
+  if (this.formulario.controls['montoEfectivo'].value == '0') {
+    this.notificacion.mensaje(
+      'Error',
+      'El monto en efectivo no puede ser 0',
+      TipoMessage.error
+    );
+    return;
+  }
+
+  //reg monto
+  if (!regMonto.test(this.formulario.controls['montoEfectivo'].value)) {
+    this.notificacion.mensaje(
+      'Error',
+      'Monto en efectivo inválido',
+      TipoMessage.error
+    );
+    return;
+  }
+}
+  
+if (this.tarjeta) {
+  let regTarjeta = new RegExp('^[1-9]{1}[0-9]{15}$');
+
+   //numero tarjeta vacio
+   if (this.formulario.controls['numero'].value == '') {
+    this.notificacion.mensaje(
+      'Error',
+      'Por favor ingrese un número de tarjeta',
+      TipoMessage.error
+    );
+    return;
+  }
+
+     //reg tarjeta
+     if (!regTarjeta.test(this.formulario.controls['numero'].value)) {
+      this.notificacion.mensaje(
+        'Error',
+        'Número de tarjeta inválido',
+        TipoMessage.error
+      );
+      return;
+    }
+
+//monto vacio
+  if (this.formulario.controls['montoTarjeta'].value == '') {
+    this.notificacion.mensaje(
+      'Error',
+      'Por favor ingrese un monto en tarjeta',
+      TipoMessage.error
+    );
+    return;
+  }
+
+ 
+//monto en 0
+  if (this.formulario.controls['montoTarjeta'].value == '0') {
+    this.notificacion.mensaje(
+      'Error',
+      'El monto de tarjeta no puede ser 0',
+      TipoMessage.error
+    );
+    return;
+  }
+
+  //reg monto
+  if (!regMonto.test(this.formulario.controls['montoTarjeta'].value)) {
+    this.notificacion.mensaje(
+      'Error',
+      'Monto de tarjeta inválido',
+      TipoMessage.error
+    );
+    return;
+  }
+
+
+}
+
+
     //validar montos
     if (parseFloat(this.formulario.value.montoEfectivo) + parseFloat(this.formulario.value.montoTarjeta) < parseFloat(this.datosDialog.total)) {
       this.notificacion.mensaje(
@@ -220,6 +294,7 @@ export class OrdenPagoComponent implements OnInit {
         'Pago realizado con éxito',
         TipoMessage.success
       );
+      this.dialogRef.close(true);
       /*------------------------------------------------------------------------ */
     } else {
       //comanda en sede
@@ -265,6 +340,7 @@ export class OrdenPagoComponent implements OnInit {
                             TipoMessage.success
                           );
                         }
+                        this.dialogRef.close(true);
                       });
                   });
               }
@@ -296,7 +372,6 @@ export class OrdenPagoComponent implements OnInit {
     //Crea los detalles de los productos del carrito
     let respDetalle;
     this.cartService.currentDataCart$.subscribe(data=>{
-      console.log(data)
      data.forEach((item) => {
         let newDetalle = {
           cantidad: item.cantidad,
